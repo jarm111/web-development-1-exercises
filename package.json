@@ -1,0 +1,23 @@
+{
+  "name": "web-development-1",
+  "version": "1.0.0",
+  "description": "My solutions for the Web Development 1 2017 course exercises at JAMK University of Applied Sciences.",
+  "main": "index.js",
+  "dependencies": {
+    "eslint": "^5.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/jarm111/web-development-1.git"
+  },
+  "author": "jarm111",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/jarm111/web-development-1/issues"
+  },
+  "homepage": "https://gitlab.com/jarm111/web-development-1#README"
+}
