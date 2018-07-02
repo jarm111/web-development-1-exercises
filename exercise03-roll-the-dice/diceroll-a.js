@@ -1,4 +1,5 @@
 /**
+ * Harjoitus 3A
  * a) Tee JS-funktio (ES5) jossa heitetään noppaa n kertaa: function rollDice(n) {}. 
  * Nopassa on kuusi sivua joissa on numerot 1-6. Funktio kerää heittojen tulokset taulukkoon joka palautetaan lopuksi. 
  * Tee funktio joka ottaa taulukon parametrikseen ja tulostaa selaimeen nopanheiton tulokset. 
