@@ -12,15 +12,12 @@
  * he loses - if dealer has over 21 points, player wins - if player
  * points > dealer points, player wins. if dealer points > player points,
  * dealer wins.
- */
-
-/*
+ * 
  * Try this little text based Java game in NetBeans. Then Rewrite the game in Javascript.
  * The JS game must work in browser. You can reuse this Java code, because Java and JS
  * resemble each other quite much. Comment all things that are different
  * in Javascript compared to Java. Tip: You can use prompt() to text input
  * in Javascript.
- *
  */
 
 /* exported start */
