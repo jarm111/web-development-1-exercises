@@ -5,8 +5,8 @@ function StaffMember(name, discountPercent) {
     this.discountPercent = discountPercent;
 }
 
-var sally = new StaffMember("Sally", 5);
-var bob = new StaffMember("Bob", 10);
+// var sally = new StaffMember('Sally', 5);
+// var bob = new StaffMember('Bob', 10);
 
 // Create yourself again as 'me' with a staff discount of 20%
 var me = new StaffMember('Jarmo', 20);
@@ -21,18 +21,18 @@ var cashRegister = {
     },
     scan: function(item, quantity) {
         switch (item) {
-            case "eggs":
-                this.add(0.98 * quantity);
-                break;
-            case "milk":
-                this.add(1.23 * quantity);
-                break;
-            case "magazine":
-                this.add(4.99 * quantity);
-                break;
-            case "chocolate":
-                this.add(0.45 * quantity);
-                break;
+        case 'eggs':
+            this.add(0.98 * quantity);
+            break;
+        case 'milk':
+            this.add(1.23 * quantity);
+            break;
+        case 'magazine':
+            this.add(4.99 * quantity);
+            break;
+        case 'chocolate':
+            this.add(0.45 * quantity);
+            break;
         }
         return true;
     },

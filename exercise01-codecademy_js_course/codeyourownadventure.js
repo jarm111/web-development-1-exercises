@@ -1,8 +1,8 @@
 // Code your own adventure
 // Check if the user is ready to play!
-confirm('Are you ready to play?')
+confirm('Are you ready to play?');
 
-var age = prompt("What's your age");
+var age = prompt('What\'s your age');
 
 if (age < 13) {
     console.log('You are allowed to play, but I hold no responsibility of the consequences');
