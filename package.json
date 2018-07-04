@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "My solutions for the Web Development 1 2017 course exercises at JAMK University of Applied Sciences.",
   "main": "index.js",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "eslint": "^5.0.1"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
