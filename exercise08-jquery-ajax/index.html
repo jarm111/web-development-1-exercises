@@ -1,0 +1,27 @@
+﻿<html>
+    <head>
+        <title>index</title>
+        <!-- Ajax-toiminnot ovat erillisessä tiedostossa ajax.js -->
+        <script src="ajax.js" type="text/javascript" language="javascript"></script>
+    </head>
+    <body>
+		<h3>Lähetä Tunnus ja Salasana tietokantaan</h3>
+        <form action="adduser.php" method="post" name="form">
+            <table border="0">
+                <tr>
+                    <td>Tunnus:</td>
+                    <!-- Asiakas käynnistyy Ajax-tapahtuman kutsumalla  onBlur -tapahtumankäsittelijää   -->
+                    <td><input type="text" name="username" id="username" value="" size="20" onBlur="startRequest(this.value);"></td>
+                    <!-- id:llä dbdata merkityn elementin sisälle tulee tieto siitä onko tunnus käytettävissä  -->
+                    <td><div id="dbdata"></div></td>
+                </tr>
+                <tr>
+                    <td>Salasana:</td>
+                    <td><input type="password" name="password" id="password" value="" size="20"></td>
+                    <td></td>
+                </tr>
+            </table>
+            <p><input type="submit" name="submit" id="submit" value="Lähetä"></p>
+        </form>
+    </body>
+</html>
