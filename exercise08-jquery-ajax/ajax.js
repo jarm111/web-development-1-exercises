@@ -13,13 +13,16 @@
  */
 
 $(document).ready(function () {
+    /**
+     * On username-field loses focus call dbquery.php with value of the element
+     */
     $('#username').blur(function () {
-        $.get('dbquery.php?q=' + $('#username').val(), function(results) {
-            // console.log(results);
-            $('#dbdata').html(results);
-        });
+        $('#dbdata').load('dbquery.php?q=' + $('#username').val());
     });
 
+    /**
+     * Toggles submit-button enabled state based on field values
+     */
     function enableButton() {
         if ($('#username').val() === ''
             || $('#password').val() === ''
@@ -30,7 +33,7 @@ $(document).ready(function () {
         }
     }
     /**
-     * Run enableButton repeatedly
+     * Run enableButton() repeatedly
      */
     setInterval(enableButton, 100);
 });
