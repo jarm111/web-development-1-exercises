@@ -3,7 +3,7 @@
         <title>index</title>
         <!-- Ajax-toiminnot ovat erillisessä tiedostossa ajax.js -->
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script src="oldajax.js" type="text/javascript" language="javascript"></script>
+        <script src="ajax.js" type="text/javascript" language="javascript"></script>
     </head>
     <body>
 		<h3>Lähetä Tunnus ja Salasana tietokantaan</h3>
@@ -12,7 +12,7 @@
                 <tr>
                     <td>Tunnus:</td>
                     <!-- Asiakas käynnistyy Ajax-tapahtuman kutsumalla  onBlur -tapahtumankäsittelijää   -->
-                    <td><input type="text" name="username" id="username" value="" size="20" onBlur="startRequest(this.value);"></td>
+                    <td><input type="text" name="username" id="username" value="" size="20"></td>
                     <!-- id:llä dbdata merkityn elementin sisälle tulee tieto siitä onko tunnus käytettävissä  -->
                     <td><div id="dbdata"></div></td>
                 </tr>

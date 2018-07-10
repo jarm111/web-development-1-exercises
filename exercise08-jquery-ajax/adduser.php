@@ -19,7 +19,7 @@ if ($submit) {
     //yhteydenotto kantaan kannattaisi laittaa connect.php -tiedostoon jonka voisi incluudata
     //joka sivulle jossa sitä tarvitaan
     $yhteys = mysqli_connect("localhost", "root", "") or die("Yhteyttä kantaan ei saatu");
-    mysqli_select_db($yhteys, "websk1_esim") or die("Tietokantaa ei löydy");
+    mysqli_select_db($yhteys, "websk1") or die("Tietokantaa ei löydy");
 
     $query = "INSERT INTO user SET username='$username', password='$password'";
 

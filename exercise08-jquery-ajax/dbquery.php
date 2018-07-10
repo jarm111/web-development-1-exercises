@@ -21,7 +21,7 @@ $value = $_GET['q'];
 //yhteydenotto kantaan kannattaisi laittaa connect.php -tiedostoon jonka voisi incluudata
 //joka sivulle jossa sitä tarvitaan
 $yhteys = mysqli_connect("localhost", "root", "") or die("Yhteyttä kantaan ei saatu");
-mysqli_select_db($yhteys, "websk1_esim") or die("Tietokantaa ei löydy");
+mysqli_select_db($yhteys, "websk1") or die("Tietokantaa ei löydy");
 
 //valitaan kaikki tietueet joiden username-kentässä on lomakkeelle syötetty arvo
 $query = "SELECT * FROM user where username ='$value'";
