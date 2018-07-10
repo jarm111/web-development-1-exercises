@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "My solutions for the Web Development 1 2017 course exercises at JAMK University of Applied Sciences.",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "jquery": "^3.3.1"
+  },
   "devDependencies": {
     "eslint": "^5.0.1"
   },
