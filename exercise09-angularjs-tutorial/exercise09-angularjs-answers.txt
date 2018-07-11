@@ -1,0 +1,39 @@
+Exercise 9 - AngularJS Questions and Answers
+
+1. Introduction: 
+
+Mitkä ovat tutoriaalin pienten sovellusten model, view ja controller? 
+
+Tarvitseeko Angularjs -sovelluksessa aina olla Controlleria? 
+
+Mitä tarkoittaa Two-way data binding?
+
+2. Controllers: 
+
+Mitkä ovat tutoriaalin pienten sovellusten model, view ja controller?  
+
+Mikä on scope-olion merkitys? 
+
+Mikä on Angularjs -sovelluksen Moduuli ja miksi pitää tehdä Moduuleja? 
+
+3. Routing: 
+
+Mikä on Angularjs:n reitityksen periaate? 
+
+Mitä Angularjs:n komponentteja tarvitaan reitityksen toteuttamiseen? 
+
+4. Services: 
+
+Mikä on Service ja sen rooli Angularjs-sovelluksessa. 
+
+Millaisia valmiita Servicejä Angularjs tarjoaa ja kuinka ne otetaan käyttöön?
+
+Mitä tarkoittaa Dependency Injection ja miten se toimii esimerkissä? 
+
+Miksi Services -sivun kohdan 6. muokattava kontaktilista on arkkitehtuuriltaan parempi kuin aiemmin tehty samalla tavalla toimiva sovellus Controllers -sivulla?
+
+5. 
+
+Kuinka voit hakea palvelinpuolelta dataa Angularjs:iin ja kuinka lähetät dataa palvelimelle Angularjs -sovelluksesta? 
+
+Mitä Angularjs:n Serviceä voit käyttää tähän? Etsi jokin tutoriaali (ja mainitse linkki) missä tämä on esitetty ja kerro pääpiirteittäin miten homma hoituu.
