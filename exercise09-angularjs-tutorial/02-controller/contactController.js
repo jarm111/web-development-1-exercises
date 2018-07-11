@@ -1,10 +1,14 @@
 /* exported ContactController */
+/* globals angular */
 
-function ContactController($scope) {
-    $scope.contacts = ['hi@email.com', 'hello@email.com'];
+angular.module('contactApp', []);
+
+angular.module('contactApp').controller('ContactController', function() {
+    var vm = this;
+    vm.contacts = ['hi@email.com', 'hello@email.com'];
     
-    $scope.add = function() {
-        $scope.contacts.push($scope.newcontact);
-        $scope.newcontact = '';
+    vm.add = function() {
+        vm.contacts.push(vm.newcontact);
+        vm.newcontact = '';
     };
-}
+});
