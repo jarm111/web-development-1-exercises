@@ -5,7 +5,7 @@ var orderApp = angular.module('orderApp', ['ngRoute']);
 
 //Define Routing for app
 //Uri /AddNewOrder -> template add_order.html and Controller AddOrderController
-//Uri /ShowOrders -> template show_orders.html and Controller AddOrderController
+//Uri /ShowOrders -> template show_orders.html and Controller ShowOrdersController
 orderApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/AddNewOrder', {
         templateUrl: 'templates/add_order.html',
