@@ -22,6 +22,6 @@ orderApp.controller('AddOrderController', ['$scope', function($scope) {
     $scope.message = 'This is Add new order screen';
 }]);
 
-orderApp.controller('ShowOrdersContoller', ['$scope', function($scope) {
+orderApp.controller('ShowOrdersController', ['$scope', function($scope) {
     $scope.message = 'This is Show orders screen';
 }]);
