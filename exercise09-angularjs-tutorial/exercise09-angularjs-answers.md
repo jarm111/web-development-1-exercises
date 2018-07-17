@@ -24,7 +24,7 @@ Model ja Viewit ovat automaattisesti synkronisoitu.
 Model = html:n puolella esim. ng-model="newcontact.name", koodissa $scope olio sitoo controllerin viewiin
 View = <html ng-app="contactApp">
 Controller = html:ssä: <div ng-controller="ContactController">
-koodissa: contactApp.controller('ContactController', ['$scope', 'uid', function ($scope, uid) {
+koodissa: contactApp.controller('ContactController', ['$scope', 'uid', function ($scope, uid) { ... }
 
 ### Mikä on scope-olion merkitys?
 
@@ -70,7 +70,7 @@ Dependency Injection on suunnittelumalli (Design Pattern) joka pyrkii poistamaan
 
 Services-osion koodi on rakenteeltaan parempi, koska siinä koodi on jaettu sen hoitamien tehtävien mukaan eri palikoihin. Contact-service sisältää sovelluksen businesslogiikkaa, jota voitaisiin periaatteessa hyödyntää uudelleen muualla. Kontrollerille on taas jäänyt sille kuuluva tehtävä, eli se sitoo modelin dataa viewiin hyödyntäen $scope-oliota ja käyttää Contact-serviceä toiminnallisuuksien toteuttamiseen.
 
-## 5. 
+## 5. Asiakassovelluksen kommunikointi palvelimen kanssa
 
 ### Kuinka voit hakea palvelinpuolelta dataa Angularjs:iin ja kuinka lähetät dataa palvelimelle Angularjs -sovelluksesta? 
 
