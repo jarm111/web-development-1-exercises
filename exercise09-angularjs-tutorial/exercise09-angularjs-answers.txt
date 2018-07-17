@@ -2,25 +2,49 @@ Exercise 9 - AngularJS Questions and Answers
 
 1. Introduction: 
 
-Mitkä ovat tutoriaalin pienten sovellusten model, view ja controller? 
+Mitkä ovat tutoriaalin pienten sovellusten model, view ja controller?
 
-Tarvitseeko Angularjs -sovelluksessa aina olla Controlleria? 
+Model
+View on koko html-dokumentti <html ng-app>
+Modelissa on vain yksi arvo ng-model="sometext".
+Controlleria ei ole määritetty, ng-controller puuttuu sovelluksesta.
+
+Tarvitseeko Angularjs -sovelluksessa aina olla Controlleria?
+
+Esimerkissä ei kirjaimellisesti ole määritetty controlleria, jos ei ng-showia lasketa, eli ei ilmeisesti.
 
 Mitä tarkoittaa Two-way data binding?
 
+Model ja Viewit ovat automaattisesti synkronisoitu.
+
 2. Controllers: 
 
-Mitkä ovat tutoriaalin pienten sovellusten model, view ja controller?  
+Mitkä ovat tutoriaalin pienten sovellusten model, view ja controller?
 
-Mikä on scope-olion merkitys? 
+Model = html:n puolella esim. ng-model="newcontact.name", koodissa $scope olio sitoo controllerin viewiin
+View = <html ng-app="contactApp">
+Controller = html:ssä: <div ng-controller="ContactController">
+koodissa: contactApp.controller('ContactController', ['$scope', 'uid', function ($scope, uid) {
 
-Mikä on Angularjs -sovelluksen Moduuli ja miksi pitää tehdä Moduuleja? 
+Mikä on scope-olion merkitys?
+
+Se sitoo controllerin viewiin. Se pitää sisällään modelin dataa, jota välitetään viewiin. 
+
+Mikä on Angularjs -sovelluksen Moduuli ja miksi pitää tehdä Moduuleja?
+
+Moduulit toimivat loogisina kokonaisuuksina, jotka oikein toteutettuna jakavat sovelluksen järkeviin, uudelleenkäytettäviin ja testattaviin palasiin.
+
+Moduulit pitävät koodin rakenteen järkevämpänä. Angularjs:n uudemmassa versiossa controllerit pitää määrittää moduulin sisälle.
 
 3. Routing: 
 
-Mikä on Angularjs:n reitityksen periaate? 
+Mikä on Angularjs:n reitityksen periaate?
 
-Mitä Angularjs:n komponentteja tarvitaan reitityksen toteuttamiseen? 
+Reitityksen avulla sovelluksen voi jakaa useampaan eri näkymään. Angularin $routeProvider service hoitaa reitityksen. Sen avulla voi kytkeä yhteen controllerit, view templatet (osittaiset html-sivut) ja selaimen URL-osoitteen. 
+
+Mitä Angularjs:n komponentteja tarvitaan reitityksen toteuttamiseen?
+
+Pitää ottaa käyttöön erillinen angular-route.js moduuli. Se tarjoaa $routs servicen jota käytetään $routeProviderin avulla. config() metodilla määritetään sovelluksen reititys.
 
 4. Services: 
 
