@@ -31,26 +31,26 @@ contactApp.controller('ContactController', ['$scope', 'uid', function ($scope, u
         }
         // Clear the add contact form
         $scope.newcontact= {};
-
-        // Search contact with gived id and delete it
-        $scope.delete = function(id) {
-            for(var i in $scope.contacts) {
-                if($scope.contacts[i].id === id) {
-                    $scope.contacts.splice(i,1);
-                    $scope.newcontact = {};
-                }
+    };
+    
+    // Search contact with gived id and delete it
+    $scope.delete = function(id) {
+        for(var i in $scope.contacts) {
+            if($scope.contacts[i].id === id) {
+                $scope.contacts.splice(i,1);
+                $scope.newcontact = {};
             }
-        };
+        }
+    };
 
-        // Search contact with gived id and update it
-        $scope.edit = function(id) {
-            for (var i in $scope.contacts) {
-                if($scope.contacts[i].id === id) {
-                    // we use angular.copy() method to 
-                    // create copy of original object
-                    $scope.newcontact = angular.copy($scope.contacts[i]);
-                }
+    // Search contact with gived id and update it
+    $scope.edit = function(id) {
+        for (var i in $scope.contacts) {
+            if($scope.contacts[i].id === id) {
+                // we use angular.copy() method to 
+                // create copy of original object
+                $scope.newcontact = angular.copy($scope.contacts[i]);
             }
-        };
+        }
     };
 }]);
