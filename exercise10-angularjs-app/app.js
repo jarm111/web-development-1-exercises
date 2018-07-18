@@ -20,6 +20,18 @@ registrationApp.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
+registrationApp.service('DataService', function() {
+    var data = [];
+
+    this.getData = function() {
+        return data;
+    };
+
+    this.putData = function(thing) {
+        data.push(thing);
+    };
+});
+
 /**
  * Controller that handles showing of registrations
  */
@@ -30,6 +42,11 @@ registrationApp.controller('ShowRegistrationsController', ['$scope', function($s
 /**
  * Controller that handles Register page
  */
-registrationApp.controller('RegisterController', ['$scope', function($scope) {
-    $scope.message = 'This is register screen';
+registrationApp.controller('RegisterController', ['$scope', '$location', 'DataService', function($scope, $location, DataService) {
+    $scope.submit = function() {
+        DataService.putData($scope.newreg);
+        $scope.newreg = {};
+        console.log(DataService.getData());
+        $location.path('/ShowRegistrations');
+    };
 }]);
