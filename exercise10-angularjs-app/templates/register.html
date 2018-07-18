@@ -1,3 +1,30 @@
-<h2>Register</h2>
-
-{{ message }}
+<div class="card">
+        <div class="card-header">
+            Ilmoittautumislomake
+        </div>
+        <div class="card-body">
+            <form action="">
+                <div class="form-group">
+                    <label for="name">Nimi:</label>
+                    <input type="text" class="form-control" id="name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email">
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="sauna">
+                    <label class="form-check-label" for="sauna">Osallistun saunailtaan</label>
+                </div>
+                <div class="form-group">
+                    <label for="foodSelection">Ruokavalinta</label>
+                    <select class="form-control" id="foodSelection">
+                        <option>Kala</option>
+                        <option>Liha</option>
+                        <option>Kasvis</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Lähetä</button>
+            </form>
+        </div>
+    </div>

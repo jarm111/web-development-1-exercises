@@ -16,7 +16,7 @@ registrationApp.config(['$routeProvider', function($routeProvider) {
         templateUrl: 'templates/register.html',
         controller: 'RegisterController'
     }).otherwise({
-        redirectTo: '/Register'
+        redirectTo: '/ShowRegistrations'
     });
 }]);
 
