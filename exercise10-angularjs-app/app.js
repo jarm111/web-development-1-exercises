@@ -37,10 +37,6 @@ registrationApp.service('DataService', function() {
         'sauna': false
     }];
 
-    // this.getCounter = function() {
-    //     return counter;
-    // };
-
     this.getData = function() {
         return data;
     };
@@ -62,10 +58,12 @@ registrationApp.controller('ShowRegistrationsController', ['$scope', 'DataServic
  * Controller that handles Register page
  */
 registrationApp.controller('RegisterController', ['$scope', '$location', 'DataService', function($scope, $location, DataService) {
-    $scope.submit = function() {
-        DataService.putData($scope.newreg);
-        $scope.newreg = {};
-        console.log(DataService.getData());
-        $location.path('/ShowRegistrations');
+    $scope.submit = function(isFormValid) {
+        if (isFormValid) {
+            DataService.putData($scope.newreg);
+            $scope.newreg = {};
+            console.log(DataService.getData());
+            $location.path('/ShowRegistrations');
+        }
     };
 }]);

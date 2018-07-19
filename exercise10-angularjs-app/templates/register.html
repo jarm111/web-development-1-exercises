@@ -3,14 +3,16 @@
         Ilmoittautumislomake
     </div>
     <div class="card-body">
-        <form action="">
+        <form name="regform" novalidate>
             <div class="form-group">
                 <label for="name">Nimi:</label>
-                <input type="text" class="form-control" id="name" ng-model="newreg.name">
+                <input type="text" class="form-control" id="name" name="name" ng-model="newreg.name" required>
+                <small ng-show="regform.name.$touched && regform.name.$invalid" class="form-text text-muted">Syötä nimesi.</small>
             </div>
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" ng-model="newreg.email">
+                <input type="email" class="form-control" id="email" name="email" ng-model="newreg.email" required>
+                <small ng-show="regform.email.$touched && regform.email.$invalid" class="form-text text-muted">Syötä sähköposti.</small>
             </div>
             <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="sauna" ng-model="newreg.sauna">
@@ -18,13 +20,16 @@
             </div>
             <div class="form-group">
                 <label for="foodSelection">Ruokavalinta</label>
-                <select class="form-control" id="foodSelection" ng-model="newreg.food">
+                <select class="form-control" id="foodSelection" name="foodSelection" ng-model="newreg.food" required>
                     <option value="kala" selected>Kala</option>
                     <option value="liha">Liha</option>
                     <option value="kasvis">Kasvis</option>
                 </select>
+                <small ng-show="regform.foodSelection.$touched && regform.foodSelection.$invalid" class="form-text text-muted">
+                    Valitse ruoka.
+                </small>
             </div>
-            <button type="button" class="btn btn-primary" ng-click="submit()">Lähetä</button>
+            <button type="button" class="btn btn-primary" ng-click="submit(regform.$valid)">Lähetä</button>
         </form>
     </div>
 </div>
