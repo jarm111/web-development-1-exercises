@@ -15,13 +15,13 @@
                 <small ng-show="regform.email.$touched && regform.email.$invalid" class="form-text text-muted">Syötä sähköposti.</small>
             </div>
             <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="sauna" ng-model="newreg.sauna">
+                <input type="checkbox" class="form-check-input" id="sauna" ng-model="newreg.sauna" ng-init="newreg.sauna=false">
                 <label class="form-check-label" for="sauna">Osallistun saunailtaan</label>
             </div>
             <div class="form-group">
                 <label for="foodSelection">Ruokavalinta</label>
                 <select class="form-control" id="foodSelection" name="foodSelection" ng-model="newreg.food" required>
-                    <option value="kala" selected>Kala</option>
+                    <option value="kala">Kala</option>
                     <option value="liha">Liha</option>
                     <option value="kasvis">Kasvis</option>
                 </select>
