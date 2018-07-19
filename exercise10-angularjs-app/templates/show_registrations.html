@@ -15,11 +15,11 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="n in registrations">
-                        <th scope="row">1</th>
+                        <th scope="row">{{ n.id }}</th>
                         <td>{{ n.name }}</td>
                         <td>{{ n.email }}</td>
                         <td>{{ n.food }}</td>
-                        <td>{{ n.sauna }}</td>
+                        <td>{{ n.sauna ? 'kyllä' : 'ei' }}</td>
                     </tr>
                 </tbody>
             </table>
