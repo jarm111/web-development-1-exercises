@@ -1,3 +1,19 @@
+/**
+ * Harjoitus10.
+ * 
+ * Tee tässä videossa esitetty Angular1-sovellus ja sille ulkoasu Bootstrapilla. 
+ * Alkuun pääset tämän oppaan avulla. 
+ * Sovelluksessa on siis kaksi Angularjs:n reitityksellä toteutettua näkymää: 
+ * Ilmoittautuneet ja Ilmoittautumislomake. 
+ * Sovelluksen data menee JS-taulukkoon joka sijaitsee dataservice -nimisessä Servicessä. 
+ * Service palauttaa metodit getData ja putData 
+ * joita käytetään kontrollereissa joissa lisätään data scopesta Servicen taulukkoon 
+ * ja haetaan data taulukosta scopeen. 
+ * Data säilyy muistissa niin kauan kunnes sivu "reffataan" eli ladataan uudelleen. 
+ * Pysyvää tallennusta eli backendiä sovelluksessa ei ole.
+ * Bootstrapin piirteistä on käytetty paneeleja, formeja ja tablea.
+ */
+
 /* globals angular */
 
 /**
@@ -62,7 +78,6 @@ registrationApp.controller('RegisterController', ['$scope', '$location', 'DataSe
         if (isFormValid) {
             DataService.putData($scope.newreg);
             $scope.newreg = {};
-            console.log(DataService.getData());
             $location.path('/ShowRegistrations');
         }
     };
