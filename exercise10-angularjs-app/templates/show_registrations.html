@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" ng-controller="ShowRegistrationsController">
         <div class="card-header">
             Ilmoittautuneet
         </div>
@@ -14,19 +14,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr ng-repeat="n in registrations">
                         <th scope="row">1</th>
-                        <td>Ossi Osallistuja</td>
-                        <td>ossi@osallistuja.com</td>
-                        <td>Kala</td>
-                        <td>joo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Keijo Esimerkki</td>
-                        <td>esim@esim.de</td>
-                        <td>Kasvis</td>
-                        <td>ei</td>
+                        <td>{{ n.name }}</td>
+                        <td>{{ n.email }}</td>
+                        <td>{{ n.food }}</td>
+                        <td>{{ n.sauna }}</td>
                     </tr>
                 </tbody>
             </table>

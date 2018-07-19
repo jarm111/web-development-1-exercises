@@ -21,22 +21,32 @@ registrationApp.config(['$routeProvider', function($routeProvider) {
 }]);
 
 registrationApp.service('DataService', function() {
-    var data = [];
+    var data = [{
+        'email': 'juha.mieto@oujee.fi',
+        'food': 'kasvis',
+        'name': 'Juha Mieto',
+        'sauna': true
+    }, {
+        'email': 'ossi@osallistuja.com',
+        'food': 'kala',
+        'name': 'Ossi Osallistuja',
+        'sauna': false
+    }];
 
     this.getData = function() {
         return data;
     };
 
-    this.putData = function(thing) {
-        data.push(thing);
+    this.putData = function(newData) {
+        data.push(newData);
     };
 });
 
 /**
  * Controller that handles showing of registrations
  */
-registrationApp.controller('ShowRegistrationsController', ['$scope', function($scope) {
-    $scope.message = 'This is show_registrations screen';
+registrationApp.controller('ShowRegistrationsController', ['$scope', 'DataService', function($scope, DataService) {
+    $scope.registrations = DataService.getData();
 }]);
 
 /**
