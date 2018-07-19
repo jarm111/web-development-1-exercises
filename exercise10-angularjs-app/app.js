@@ -21,23 +21,32 @@ registrationApp.config(['$routeProvider', function($routeProvider) {
 }]);
 
 registrationApp.service('DataService', function() {
+
+    var counter = 2;
     var data = [{
         'email': 'juha.mieto@oujee.fi',
         'food': 'kasvis',
+        'id': 1,
         'name': 'Juha Mieto',
         'sauna': true
     }, {
         'email': 'ossi@osallistuja.com',
         'food': 'kala',
+        'id': 2,
         'name': 'Ossi Osallistuja',
         'sauna': false
     }];
+
+    // this.getCounter = function() {
+    //     return counter;
+    // };
 
     this.getData = function() {
         return data;
     };
 
     this.putData = function(newData) {
+        newData.id = ++counter;
         data.push(newData);
     };
 });
