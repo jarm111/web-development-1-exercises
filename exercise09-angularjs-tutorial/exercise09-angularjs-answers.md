@@ -4,14 +4,13 @@
 
 ### Mitkä ovat tutoriaalin pienten sovellusten model, view ja controller?
 
-Model
-View on koko html-dokumentti <html ng-app>
-Modelissa on vain yksi arvo ng-model="sometext".
+Model on $scope-olion muuttujiin tallennetut arvot, eli "sometext".
+View on käyttäjälle näkyvä renderöity DOM-puu.
 Controlleria ei ole määritetty, ng-controller puuttuu sovelluksesta.
 
 ### Tarvitseeko Angularjs -sovelluksessa aina olla Controlleria?
 
-Esimerkissä ei kirjaimellisesti ole määritetty controlleria, jos ei ng-showia lasketa, eli ei ilmeisesti.
+Esimerkissä ei ole määritetty controlleria eli ei tarvitse.
 
 ### Mitä tarkoittaa Two-way data binding?
 
@@ -21,20 +20,20 @@ Model ja Viewit ovat automaattisesti synkronisoitu.
 
 ### Mitkä ovat tutoriaalin pienten sovellusten model, view ja controller?
 
-Model = html:n puolella esim. ng-model="newcontact.name", koodissa $scope olio sitoo controllerin viewiin
-View = <html ng-app="contactApp">
-Controller = html:ssä: <div ng-controller="ContactController">
-koodissa: contactApp.controller('ContactController', ['$scope', 'uid', function ($scope, uid) { ... }
+Model = $scopessa oleva contacts taulukko ja newcontact-olio
+
+View = on käyttäjän selaimessa renderöity sivu jonka kanssa hän vuorovaikuttaa.
+
+Controller = HTML:ssä ng-controller="ContactController" kertoo, että tämä kontrolleri on vastuussa tämän elementin ja sen lapsielementtien ohjauksesta.
+Koodissa määritetään konstruktori-funktio 'ContactController', josta luodaan kontrollerin instanssi.
 
 ### Mikä on scope-olion merkitys?
 
-Se sitoo controllerin viewiin. Se pitää sisällään modelin dataa, jota välitetään viewiin. 
+Scope-olio on konteksti, johon model säilötään, jotta kontrollereilla, direktiiveilla ja expressioneilla on pääsy modeliin.
 
 ### Mikä on Angularjs -sovelluksen Moduuli ja miksi pitää tehdä Moduuleja?
 
-Moduulit toimivat loogisina kokonaisuuksina, jotka oikein toteutettuna jakavat sovelluksen järkeviin, uudelleenkäytettäviin ja testattaviin palasiin.
-
-Moduulit pitävät koodin rakenteen järkevämpänä. Angularjs:n uudemmassa versiossa controllerit pitää määrittää moduulin sisälle.
+Moduulit toimivat loogisina kokonaisuuksina, jotka oikein toteutettuna jakavat sovelluksen järkeviin, uudelleenkäytettäviin ja testattaviin palasiin. Se on säiliö sovelluksen muille osasille, kuten controllereille, serviceille, filtereille ja direktiiveille. Moduulit pitävät koodin rakenteen järkevämpänä.
 
 ## 3. Routing: 
 
@@ -44,13 +43,13 @@ Reitityksen avulla sovelluksen voi jakaa useampaan eri näkymään. Angularin $r
 
 ### Mitä Angularjs:n komponentteja tarvitaan reitityksen toteuttamiseen?
 
-Pitää ottaa käyttöön erillinen angular-route.js moduuli. Se tarjoaa $routs servicen jota käytetään $routeProviderin avulla. config() metodilla määritetään sovelluksen reititys.
+Pitää ottaa käyttöön erillinen angular-route.js moduuli. Se tarjoaa $route servicen jota käytetään $routeProviderin avulla. config() metodilla määritetään sovelluksen reititys.
 
 ## 4. Services: 
 
 ### Mikä on Service ja sen rooli Angularjs-sovelluksessa.
 
-Servicet on olioita, jotka pitävät sisällään sovelluksen business logiikkaa / hyödyllisiä funktioita. Niitä voivat käyttää toiset Servicet, Controllerit tai muut konstruktiot. Ne auttavat koodin organisoinnissa ja niiden avulla voi luoda uudelleenkäytettävää koodia.
+Servicet ovat olioita, jotka pitävät sisällään sovelluksen yleistä business logiikkaa / hyödyllisiä funktioita. Niitä voivat käyttää toiset Servicet, Controllerit tai muut konstruktiot. Ne auttavat koodin organisoinnissa ja niiden avulla voi luoda uudelleenkäytettävää koodia.
 
 ### Millaisia valmiita Servicejä Angularjs tarjoaa ja kuinka ne otetaan käyttöön?
 
@@ -81,7 +80,6 @@ $http.get('/someUrl', config).then(successCallback, errorCallback);
 
 $http.post() metodilla voi lähettää dataa
 $http.post('/someUrl', data, config).then(successCallback, errorCallback);
-
 
 ### Mitä Angularjs:n Serviceä voit käyttää tähän? Etsi jokin tutoriaali (ja mainitse linkki) missä tämä on esitetty ja kerro pääpiirteittäin miten homma hoituu.
 
