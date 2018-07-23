@@ -31,13 +31,33 @@ registrationApp.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
-registrationApp.service('DataService', function() {
+/**
+ * Service that offers saving/loading data to/from localstorage
+ */
+registrationApp.service('StorageService', function() {
+    var storageId = 'regAppData';
+    
+    this.get = function() {
+        var data = JSON.parse(localStorage.getItem(storageId));
+
+        return (data == null) ? [] : data;
+    };
+
+    this.set = function(data) {
+        localStorage.setItem('regAppData', JSON.stringify(data));
+    };
+});
+
+/**
+ * Service that manages application's data
+ */
+registrationApp.service('DataService', ['StorageService', function(StorageService) {
 
     var counter = 0;
     var data = [];
 
     this.initData = function() {
-        var storageData = JSON.parse(localStorage.getItem('regAppData'));
+        var storageData = StorageService.get();
         storageData.forEach(function(element) {
             data.push(element);
             counter++;
@@ -51,9 +71,9 @@ registrationApp.service('DataService', function() {
     this.putData = function(newData) {
         newData.id = ++counter;
         data.push(newData);
-        localStorage.setItem('regAppData', JSON.stringify(data));
+        StorageService.set(data);
     };
-});
+}]);
 
 /**
  * Controller that handles showing of registrations
