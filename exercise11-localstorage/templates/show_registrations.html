@@ -14,7 +14,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="n in registrations">
+                    <tr ng-repeat="n in registrations track by $index">
                         <th scope="row">{{ n.id }}</th>
                         <td>{{ n.name }}</td>
                         <td>{{ n.email }}</td>
