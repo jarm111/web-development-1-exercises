@@ -44,7 +44,7 @@ registrationApp.service('StorageService', function() {
     };
 
     this.set = function(data) {
-        localStorage.setItem('regAppData', JSON.stringify(data));
+        localStorage.setItem(storageId, JSON.stringify(data));
     };
 });
 
