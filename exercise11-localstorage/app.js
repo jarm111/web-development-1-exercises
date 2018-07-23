@@ -33,20 +33,16 @@ registrationApp.config(['$routeProvider', function($routeProvider) {
 
 registrationApp.service('DataService', function() {
 
-    var counter = 2;
-    var data = [{
-        'email': 'juha.mieto@oujee.fi',
-        'food': 'kasvis',
-        'id': 1,
-        'name': 'Juha Mieto',
-        'sauna': true
-    }, {
-        'email': 'ossi@osallistuja.com',
-        'food': 'kala',
-        'id': 2,
-        'name': 'Ossi Osallistuja',
-        'sauna': false
-    }];
+    var counter = 0;
+    var data = [];
+
+    this.initData = function() {
+        var storageData = JSON.parse(localStorage.getItem('regAppData'));
+        storageData.forEach(function(element) {
+            data.push(element);
+            counter++;
+        });
+    };
 
     this.getData = function() {
         return data;
@@ -55,6 +51,7 @@ registrationApp.service('DataService', function() {
     this.putData = function(newData) {
         newData.id = ++counter;
         data.push(newData);
+        localStorage.setItem('regAppData', JSON.stringify(data));
     };
 });
 
@@ -76,4 +73,11 @@ registrationApp.controller('RegisterController', ['$scope', '$location', 'DataSe
             $location.path('/ShowRegistrations');
         }
     };
+}]);
+
+/**
+ * Executed when application starts
+ */
+registrationApp.run(['DataService', function(DataService) {
+    DataService.initData();
 }]);
