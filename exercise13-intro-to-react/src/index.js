@@ -128,9 +128,10 @@ class Game extends React.Component {
         });
 
         let status;
+        const boardFilledTurnNumber = 9;
         if (winner) {
             status = 'Winner ' + winner;
-        } else if (this.state.stepNumber === 9) {
+        } else if (this.state.stepNumber === boardFilledTurnNumber) {
             status = "Game Over, Tie!";
         } else {
             status = 'Next player: ' +
