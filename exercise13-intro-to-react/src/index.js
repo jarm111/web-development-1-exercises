@@ -1,7 +1,15 @@
+/**
+ * Tutorial: Intro to React - interactive tic-tac-toe game with React
+ */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+/**
+ * Functional controlled component. Provides squares of the game board to click and displays a provided value in the button.
+ * @param {Object} props object that has onClick and value properties
+ */
 function Square(props) {
     return (
         <button className="square" onClick={props.onClick}>
@@ -10,6 +18,9 @@ function Square(props) {
     );
 }
 
+/**
+ * Stateles, controlled class component that Renders the 3*3 game board made of Squares
+ */
 class Board extends React.Component {
     renderSquare(i) {
         return (
@@ -43,7 +54,15 @@ class Board extends React.Component {
     }
 }
 
+/**
+ * Stateful class component.
+ * Handle's game's state, logic and history of moves. 
+ * Renders the board element, game's status and history of moves.
+ */
 class Game extends React.Component {
+    /**
+     * Constructor for initializing state
+     */
     constructor(props) {
         super(props);
         this.state = {
@@ -55,6 +74,10 @@ class Game extends React.Component {
         }
     }
 
+    /**
+     * Controls what happens when user click's a board's square
+     * @param {number} i the square's index number
+     */
     handleClick(i) {
         const history = this.state.history.slice(0, 
             this.state.stepNumber + 1);
@@ -75,6 +98,10 @@ class Game extends React.Component {
         });
     }
 
+    /**
+     * Sets game state to provided step and evaluates and sets if it is 'X' player's turn
+     * @param {number} step number of step to jump to 
+     */
     jumpTo(step) {
         this.setState({
             stepNumber: step,
@@ -125,6 +152,11 @@ class Game extends React.Component {
     }
 }
 
+/**
+ * Helper function for calculating a win state
+ * @param {Array} squares array of game board with moves
+ * @returns if winner is found returns value in squares[a] else returns null
+ */
 function calculateWinner(squares) {
     const lines = [
         [0, 1, 2],
