@@ -1,6 +1,7 @@
 {
   "name": "exercise14-quiz-game-react",
   "version": "0.1.0",
+  "homepage": "https:./",
   "private": true,
   "dependencies": {
     "react": "^16.4.1",
