@@ -1,12 +1,16 @@
 import React from 'react';
 import './App.css';
 
-function AnswerOption(props) {
-    return (
-        <div>
-            <input type="radio" name="option" value={props.value} />{props.value}<br />
-        </div>
-    );
+function AnswerOptions(props) {
+    const options = props.options.map((value, index) => {
+        return (
+            <div key={index}>
+                <input type="radio" name="option" value={value} />{value}
+            </div>
+        );
+    })
+    
+    return <ul>{options}</ul>
 }
 
 function Result(props) {
@@ -14,11 +18,11 @@ function Result(props) {
 }
 
 function QuestionNumber(props) {
-    return <p className="App-qnumber">Question #{props.number}</p>
+    return <p className="App-qnumber">Question #{props.number}</p>;
 }
 
 function QuestionDescription(props) {
-    return <p className="Description">{props.description}</p>
+    return <p className="Description">{props.description}</p>;
 }
 
 function Question(props) {
@@ -26,13 +30,8 @@ function Question(props) {
         <div>
             <QuestionNumber number={props.number} />
             <QuestionDescription description={props.question.description} />
-            <form>
-                <AnswerOption value={props.question.options[0]} />
-                <AnswerOption value={props.question.options[1]} />
-                <AnswerOption value={props.question.options[2]} />
-                <AnswerOption value={props.question.options[3]} />
-                <input type="button" onClick="" defaultValue="Answer" />
-            </form>
+            <AnswerOptions options={props.question.options}/>
+            <input type="button" onClick="" defaultValue="Answer" />
             <Result answer="Foot-and-mouth" />
         </div>
     );
