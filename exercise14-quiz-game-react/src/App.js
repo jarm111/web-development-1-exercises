@@ -27,10 +27,10 @@ function Question(props) {
             <QuestionNumber number={props.number} />
             <QuestionDescription description={props.question.description} />
             <form>
-                <AnswerOption value="Hand-and-foot" />
-                <AnswerOption value="Foot-in-mouth" />
-                <AnswerOption value="Hand-to-mouth" />
-                <AnswerOption value="Foot-and-mouth" />
+                <AnswerOption value={props.question.options[0]} />
+                <AnswerOption value={props.question.options[1]} />
+                <AnswerOption value={props.question.options[2]} />
+                <AnswerOption value={props.question.options[3]} />
                 <input type="button" onClick="" defaultValue="Answer" />
             </form>
             <Result answer="Foot-and-mouth" />
