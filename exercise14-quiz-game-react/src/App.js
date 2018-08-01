@@ -31,7 +31,11 @@ function QuestionDescription(props) {
 }
 
 function AnswerButton(props) {
-    return <input type="button" onClick="" defaultValue="Answer" />;
+    return <input 
+                type="button" 
+                onClick={() => console.log('Answer click')} 
+                defaultValue="Answer" 
+            />;
 }
 
 function Question(props) {
