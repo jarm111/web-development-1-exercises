@@ -9,7 +9,8 @@ function AnswerOptions(props) {
                     type="radio" 
                     name="option" 
                     value={index}
-                    onClick={() => console.log('click' + index)}
+                    // onClick={() => console.log('click' + index)}
+                    onClick={() => props.onClick(index)}
                 />{value}
             </div>
         );
@@ -41,11 +42,13 @@ function AnswerButton(props) {
 function Question(props) {
     const q = props.question;
 
+    const handleClick = index => props.onSelect(index);
+
     return (
         <div>
             <QuestionNumber number={props.number} />
             <QuestionDescription description={q.description} />
-            <AnswerOptions options={q.options} />
+            <AnswerOptions options={q.options} onClick={handleClick} />
             <AnswerButton />
             <Result answer={q.options[q.answer]} />
         </div>
@@ -55,10 +58,16 @@ function Question(props) {
 class App extends React.Component {
     constructor(props) {
         super(props);
+        this.selectAnswer = this.selectAnswer.bind(this);
         this.state = {
             questionNumber: 0,
             questions: questions,
+            selectedAnswer: null,
         }
+    }
+
+    selectAnswer(selection) {
+        this.setState({selectedAnswer: selection});
     }
 
     render() {
@@ -70,6 +79,7 @@ class App extends React.Component {
                 <Question 
                     question={this.state.questions[this.state.questionNumber]} 
                     number={this.state.questionNumber + 1}
+                    onSelect={this.selectAnswer}
                 />
             </div>
         );
