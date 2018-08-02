@@ -5,23 +5,28 @@ function AnswerOptions(props) {
     const options = props.options.map((value, index) => {
         return (
             <div key={index}>
-                <input 
-                    type="radio" 
-                    name="option" 
+                <input
+                    type="radio"
+                    name="option"
                     value={index}
-                    // onClick={() => console.log('click' + index)}
                     onClick={() => props.onClick(index)}
                 />{value}
             </div>
         );
     })
-    
+
     return <ul>{options}</ul>
 }
 
-// function Result(props) {
-//     return <p>Answer: {props.answer}</p>;
-// }
+function Result(props) {
+    if (props.showResult) {
+        if (props.isRightAnswer) {
+            return <p>Correct Answer!</p>
+        }
+        return <p>Wrong answer, correct one is: {props.answer}</p>
+    }
+    return <p>Waiting for answer...</p>
+}
 
 function QuestionNumber(props) {
     return <p className="App-qnumber">Question #{props.number}</p>;
@@ -32,12 +37,12 @@ function QuestionDescription(props) {
 }
 
 function AnswerButton(props) {
-    return <input 
-                type="button" 
-                onClick={props.onClick} 
-                defaultValue="Answer"
-                disabled={props.isDisabled}
-            />;
+    return <input
+        type="button"
+        onClick={props.onClick}
+        defaultValue="Answer"
+        disabled={props.isDisabled}
+    />;
 }
 
 function Question(props) {
@@ -45,23 +50,15 @@ function Question(props) {
 
     const handleClick = index => props.onSelect(index);
 
-    const showResult = (showResult, isRightAnswer) => {
-        if (showResult) {
-            if (isRightAnswer) {
-                return  <p>Correct Answer!</p>
-            }
-            return  <p>Wrong answer, correct one is: {q.options[q.answer]}</p>
-        }
-        return <p>Waiting for answer...</p>
-    }
+
 
     return (
         <div>
             <QuestionNumber number={props.number} />
             <QuestionDescription description={q.description} />
             <AnswerOptions options={q.options} onClick={handleClick} />
-            <AnswerButton onClick={props.onSubmitAnswer} isDisabled={props.isAnswerDisabled}/>
-            {showResult(props.showResult, props.isRightAnswer)}
+            <AnswerButton onClick={props.onSubmitAnswer} isDisabled={props.isAnswerDisabled} />
+            <Result showResult={props.showResult} isRightAnswer={props.isRightAnswer} answer={q.options[q.answer]}/>
         </div>
     );
 }
@@ -81,16 +78,16 @@ class App extends React.Component {
     }
 
     selectAnswer(selection) {
-        this.setState({selectedAnswer: selection});
+        this.setState({ selectedAnswer: selection });
     }
 
     submitAnswer() {
         const s = this.state
 
         if (s.selectedAnswer !== null) {
-            const isRight = 
-                (s.selectedAnswer 
-                === s.questions[s.questionNumber].answer)
+            const isRight =
+                (s.selectedAnswer
+                    === s.questions[s.questionNumber].answer)
             this.setState({
                 showResult: true,
                 isRightAnswer: isRight,
@@ -104,8 +101,8 @@ class App extends React.Component {
                 <header className="App-header">
                     <h1 className="App-title">Quiz Game with React</h1>
                 </header>
-                <Question 
-                    question={this.state.questions[this.state.questionNumber]} 
+                <Question
+                    question={this.state.questions[this.state.questionNumber]}
                     number={this.state.questionNumber + 1}
                     onSelect={this.selectAnswer}
                     onSubmitAnswer={this.submitAnswer}
