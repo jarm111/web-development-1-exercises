@@ -35,7 +35,8 @@ function AnswerButton(props) {
     return <input 
                 type="button" 
                 onClick={props.onClick} 
-                defaultValue="Answer" 
+                defaultValue="Answer"
+                disabled={props.isDisabled}
             />;
 }
 
@@ -59,7 +60,7 @@ function Question(props) {
             <QuestionNumber number={props.number} />
             <QuestionDescription description={q.description} />
             <AnswerOptions options={q.options} onClick={handleClick} />
-            <AnswerButton onClick={props.onSubmitAnswer} />
+            <AnswerButton onClick={props.onSubmitAnswer} isDisabled={props.isAnswerDisabled}/>
             {showResult(props.showResult, props.isRightAnswer)}
         </div>
     );
@@ -110,6 +111,7 @@ class App extends React.Component {
                     onSubmitAnswer={this.submitAnswer}
                     showResult={this.state.showResult}
                     isRightAnswer={this.state.isRightAnswer}
+                    isAnswerDisabled={(this.state.selectedAnswer === null)}
                 />
             </div>
         );
