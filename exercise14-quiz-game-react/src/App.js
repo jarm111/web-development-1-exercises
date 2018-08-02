@@ -19,9 +19,9 @@ function AnswerOptions(props) {
     return <ul>{options}</ul>
 }
 
-function Result(props) {
-    return <p>Answer: {props.answer}</p>;
-}
+// function Result(props) {
+//     return <p>Answer: {props.answer}</p>;
+// }
 
 function QuestionNumber(props) {
     return <p className="App-qnumber">Question #{props.number}</p>;
@@ -44,8 +44,15 @@ function Question(props) {
 
     const handleClick = index => props.onSelect(index);
 
-    const result = (props.showResult) ? 
-        <Result answer={q.options[q.answer]} /> : <div>Result...</div>;
+    const showResult = (showResult, isRightAnswer) => {
+        if (showResult) {
+            if (isRightAnswer) {
+                return  <p>Correct Answer!</p>
+            }
+            return  <p>Wrong answer, correct one is: {q.options[q.answer]}</p>
+        }
+        return <p>Waiting for answer...</p>
+    }
 
     return (
         <div>
@@ -53,7 +60,7 @@ function Question(props) {
             <QuestionDescription description={q.description} />
             <AnswerOptions options={q.options} onClick={handleClick} />
             <AnswerButton onClick={props.onSubmitAnswer} />
-            {result}
+            {showResult(props.showResult, props.isRightAnswer)}
         </div>
     );
 }
@@ -68,6 +75,7 @@ class App extends React.Component {
             questions: questions,
             selectedAnswer: null,
             showResult: false,
+            isRightAnswer: false,
         }
     }
 
@@ -76,8 +84,16 @@ class App extends React.Component {
     }
 
     submitAnswer() {
-        if (this.state.selectedAnswer !== null) {
-            this.setState({showResult: true});
+        const s = this.state
+
+        if (s.selectedAnswer !== null) {
+            const isRight = 
+                (s.selectedAnswer 
+                === s.questions[s.questionNumber].answer)
+            this.setState({
+                showResult: true,
+                isRightAnswer: isRight,
+            });
         }
     }
 
@@ -93,6 +109,7 @@ class App extends React.Component {
                     onSelect={this.selectAnswer}
                     onSubmitAnswer={this.submitAnswer}
                     showResult={this.state.showResult}
+                    isRightAnswer={this.state.isRightAnswer}
                 />
             </div>
         );
