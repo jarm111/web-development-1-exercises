@@ -28,16 +28,9 @@ function Result(props) {
     return <p>Waiting for answer...</p>
 }
 
-function QuestionNumber(props) {
-    return <p className="App-qnumber">Question #{props.number}</p>;
-}
-
-function QuestionDescription(props) {
-    return <p className="Description">{props.description}</p>;
-}
-
 function AnswerButton(props) {
     return <input
+        className="App-AnswerButton"
         type="button"
         onClick={props.onClick}
         defaultValue="Answer"
@@ -50,12 +43,10 @@ function Question(props) {
 
     const handleClick = index => props.onSelect(index);
 
-
-
     return (
         <div>
-            <QuestionNumber number={props.number} />
-            <QuestionDescription description={q.description} />
+            <p className="App-QuestionNumber">Question #{props.number}</p>
+            <p className="App-QuestionDescription">{q.description}</p>
             <AnswerOptions options={q.options} onClick={handleClick} />
             <AnswerButton onClick={props.onSubmitAnswer} isDisabled={props.isAnswerDisabled} />
             <Result showResult={props.showResult} isRightAnswer={props.isRightAnswer} answer={q.options[q.answer]}/>
