@@ -34,7 +34,7 @@ function QuestionDescription(props) {
 function AnswerButton(props) {
     return <input 
                 type="button" 
-                onClick={() => console.log('Answer click')} 
+                onClick={props.onClick} 
                 defaultValue="Answer" 
             />;
 }
@@ -44,13 +44,16 @@ function Question(props) {
 
     const handleClick = index => props.onSelect(index);
 
+    const result = (props.showResult) ? 
+        <Result answer={q.options[q.answer]} /> : <div>Result...</div>;
+
     return (
         <div>
             <QuestionNumber number={props.number} />
             <QuestionDescription description={q.description} />
             <AnswerOptions options={q.options} onClick={handleClick} />
-            <AnswerButton />
-            <Result answer={q.options[q.answer]} />
+            <AnswerButton onClick={props.onSubmitAnswer} />
+            {result}
         </div>
     );
 }
@@ -59,15 +62,23 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.selectAnswer = this.selectAnswer.bind(this);
+        this.submitAnswer = this.submitAnswer.bind(this);
         this.state = {
             questionNumber: 0,
             questions: questions,
             selectedAnswer: null,
+            showResult: false,
         }
     }
 
     selectAnswer(selection) {
         this.setState({selectedAnswer: selection});
+    }
+
+    submitAnswer() {
+        if (this.state.selectedAnswer !== null) {
+            this.setState({showResult: true});
+        }
     }
 
     render() {
@@ -80,6 +91,8 @@ class App extends React.Component {
                     question={this.state.questions[this.state.questionNumber]} 
                     number={this.state.questionNumber + 1}
                     onSelect={this.selectAnswer}
+                    onSubmitAnswer={this.submitAnswer}
+                    showResult={this.state.showResult}
                 />
             </div>
         );
