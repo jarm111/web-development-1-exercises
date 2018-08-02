@@ -38,51 +38,56 @@ function AnswerButton(props) {
     />;
 }
 
-function Question(props) {
-    const q = props.question;
-
-    const handleClick = index => props.onSelect(index);
-
-    return (
-        <div>
-            <p className="App-QuestionNumber">Question #{props.number}</p>
-            <p className="App-QuestionDescription">{q.description}</p>
-            <AnswerOptions options={q.options} onClick={handleClick} />
-            <AnswerButton onClick={props.onSubmitAnswer} isDisabled={props.isAnswerDisabled} />
-            <Result showResult={props.showResult} isRightAnswer={props.isRightAnswer} answer={q.options[q.answer]}/>
-        </div>
-    );
-}
-
-class App extends React.Component {
+class Quiz extends React.Component {
     constructor(props) {
         super(props);
-        this.selectAnswer = this.selectAnswer.bind(this);
-        this.submitAnswer = this.submitAnswer.bind(this);
+        this.handleAnswerOptionsClick = this.handleAnswerOptionsClick.bind(this);
+        this.handleAnswerButtonClick = this.handleAnswerButtonClick.bind(this);
         this.state = {
             questionNumber: 0,
-            questions: questions,
             selectedAnswer: null,
             showResult: false,
             isRightAnswer: false,
         }
     }
 
-    selectAnswer(selection) {
+    handleAnswerOptionsClick(selection) {
         this.setState({ selectedAnswer: selection });
     }
 
-    submitAnswer() {
+    handleAnswerButtonClick() {
         const s = this.state
 
         if (s.selectedAnswer !== null) {
             const isRight =
-                (s.selectedAnswer
-                    === s.questions[s.questionNumber].answer)
+                (s.selectedAnswer === this.props.questions[s.questionNumber].answer)
             this.setState({
                 showResult: true,
                 isRightAnswer: isRight,
             });
+        }
+    }
+
+    render() {
+        const q = this.props.questions[this.state.questionNumber]
+
+        return (
+            <div>
+                <p className="App-QuestionNumber">Question #{this.state.questionNumber + 1}</p>
+                <p className="App-QuestionDescription">{q.description}</p>
+                <AnswerOptions options={q.options} onClick={this.handleAnswerOptionsClick} />
+                <AnswerButton onClick={this.handleAnswerButtonClick} isDisabled={this.state.selectedAnswer === null} />
+                <Result showResult={this.state.showResult} isRightAnswer={this.state.isRightAnswer} answer={q.options[q.answer]}/>
+            </div>
+        )
+    }
+}
+
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            questions: questionsArr,
         }
     }
 
@@ -92,21 +97,13 @@ class App extends React.Component {
                 <header className="App-header">
                     <h1 className="App-title">Quiz Game with React</h1>
                 </header>
-                <Question
-                    question={this.state.questions[this.state.questionNumber]}
-                    number={this.state.questionNumber + 1}
-                    onSelect={this.selectAnswer}
-                    onSubmitAnswer={this.submitAnswer}
-                    showResult={this.state.showResult}
-                    isRightAnswer={this.state.isRightAnswer}
-                    isAnswerDisabled={(this.state.selectedAnswer === null)}
-                />
+                <Quiz questions={this.state.questions} />
             </div>
         );
     }
 }
 
-const questions = [
+const questionsArr = [
     {
         description: "Which disease devastated livestock across the UK during 2001?",
         options: [
