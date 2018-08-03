@@ -11,6 +11,7 @@ function AnswerOptions(props) {
                     name="option"
                     value={index}
                     onClick={() => props.onClick(index)}
+                    checked={props.selected === index}
                 />{value}
             </div>
         );
@@ -72,7 +73,12 @@ class Quiz extends React.Component {
 
     handleNextButtonClick() {
         const nextQuestion = this.state.questionNumber + 1;
-        this.setState({ questionNumber: nextQuestion });
+        this.setState({ 
+            questionNumber: nextQuestion,
+            selectedAnswer: null,
+            showResult: false,
+            isRightAnswer: false
+        });
     }
 
     render() {
@@ -82,7 +88,7 @@ class Quiz extends React.Component {
             <div>
                 <p className="App-QuestionNumber">Question #{this.state.questionNumber + 1}</p>
                 <p className="App-QuestionDescription">{q.description}</p>
-                <AnswerOptions options={q.options} onClick={this.handleAnswerOptionsClick} />
+                <AnswerOptions options={q.options} onClick={this.handleAnswerOptionsClick} selected={this.state.selectedAnswer} />
                 <Button 
                     onClick={this.handleAnswerButtonClick} 
                     isDisabled={this.state.selectedAnswer === null || this.state.showResult} 
