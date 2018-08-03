@@ -46,12 +46,20 @@ class Quiz extends React.Component {
         this.handleAnswerOptionsClick = this.handleAnswerOptionsClick.bind(this);
         this.handleAnswerButtonClick = this.handleAnswerButtonClick.bind(this);
         this.handleNextButtonClick = this.handleNextButtonClick.bind(this);
-        this.state = {
+        this.handleRestartButtonClick = this.handleRestartButtonClick.bind(this);
+        this.state = this.getInitialState();
+    }
+
+    getInitialState = () => {
+        const initialState = {
             questionNumber: 0,
             selectedAnswer: null,
             showResult: false,
             isRightAnswer: false,
-        }
+            score: 0,
+            isGameOver: false,
+        };
+        return initialState;
     }
 
     handleAnswerOptionsClick(selection) {
@@ -60,33 +68,59 @@ class Quiz extends React.Component {
 
     handleAnswerButtonClick() {
         const s = this.state
+        let newScore = this.state.score;
 
         if (s.selectedAnswer !== null) {
             const isRight =
                 (s.selectedAnswer === this.props.questions[s.questionNumber].answer)
+
+            if (isRight) newScore += 1;
+
             this.setState({
                 showResult: true,
                 isRightAnswer: isRight,
+                score: newScore
             });
         }
     }
 
     handleNextButtonClick() {
+        if (this.state.questionNumber === this.props.questions.length - 1) {
+            this.setState({ isGameOver: true });
+        } else {
         const nextQuestion = this.state.questionNumber + 1;
         this.setState({ 
             questionNumber: nextQuestion,
             selectedAnswer: null,
             showResult: false,
             isRightAnswer: false
-        });
+        })};
+    }
+
+    handleRestartButtonClick() {
+        this.setState(this.getInitialState());
     }
 
     render() {
         const q = this.props.questions[this.state.questionNumber]
 
+        if (this.state.isGameOver) {
+            return (
+                <div>
+                    <h2 className="App-QuestionNumber">Game Over! Your score: {this.state.score}</h2>
+                    <Button
+                        onClick={this.handleRestartButtonClick} 
+                        isDisabled={false} 
+                        value="Restart" 
+                        className="App-RestartButton" 
+                    />
+                </div>
+            )
+        }
+
         return (
             <div>
-                <p className="App-QuestionNumber">Question #{this.state.questionNumber + 1}</p>
+                <h2 className="App-QuestionNumber">Question #{this.state.questionNumber + 1}</h2>
                 <p className="App-QuestionDescription">{q.description}</p>
                 <AnswerOptions options={q.options} onClick={this.handleAnswerOptionsClick} selected={this.state.selectedAnswer} />
                 <Button 
