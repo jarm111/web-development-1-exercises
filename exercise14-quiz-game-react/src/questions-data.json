@@ -1,0 +1,12 @@
+[
+    {
+        "description": "Which disease devastated livestock across the UK during 2001?",
+        "options": [
+            "Hand-and-foot",
+            "Foot-in-mouth",
+            "Hand-to-mouth",
+            "Foot-and-mouth"
+        ],
+        "answer": 3
+    }
+]

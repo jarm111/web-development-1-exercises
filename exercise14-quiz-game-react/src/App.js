@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import questionsData from './questions-data.json';
 
 function AnswerOptions(props) {
     const options = props.options.map((value, index) => {
@@ -87,7 +88,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            questions: questionsArr,
+            questions: questionsData,
         }
     }
 
@@ -102,18 +103,5 @@ class App extends React.Component {
         );
     }
 }
-
-const questionsArr = [
-    {
-        description: "Which disease devastated livestock across the UK during 2001?",
-        options: [
-            "Hand-and-foot",
-            "Foot-in-mouth",
-            "Hand-to-mouth",
-            "Foot-and-mouth"
-        ],
-        answer: 3
-    },
-]
 
 export default App;
