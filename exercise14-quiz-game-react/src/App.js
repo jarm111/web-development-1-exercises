@@ -29,12 +29,12 @@ function Result(props) {
     return <p>Waiting for answer...</p>
 }
 
-function AnswerButton(props) {
+function Button(props) {
     return <input
-        className="App-AnswerButton"
+        className={props.className}
         type="button"
         onClick={props.onClick}
-        defaultValue="Answer"
+        value={props.value}
         disabled={props.isDisabled}
     />;
 }
@@ -77,7 +77,12 @@ class Quiz extends React.Component {
                 <p className="App-QuestionNumber">Question #{this.state.questionNumber + 1}</p>
                 <p className="App-QuestionDescription">{q.description}</p>
                 <AnswerOptions options={q.options} onClick={this.handleAnswerOptionsClick} />
-                <AnswerButton onClick={this.handleAnswerButtonClick} isDisabled={this.state.selectedAnswer === null} />
+                <Button 
+                    onClick={this.handleAnswerButtonClick} 
+                    isDisabled={this.state.selectedAnswer === null} 
+                    value="Answer" 
+                    className="App-AnswerButton" 
+                />
                 <Result showResult={this.state.showResult} isRightAnswer={this.state.isRightAnswer} answer={q.options[q.answer]}/>
             </div>
         )
