@@ -8,5 +8,25 @@
             "Foot-and-mouth"
         ],
         "answer": 3
+    },
+    {
+        "description": "Which of these kills its victims by constriction?",
+        "options": [
+            "Andalucia",
+            "Anaconda",
+            "Andypandy",
+            "Annerobinson"
+        ],
+        "answer": 1
+    },
+    {
+        "description": "WWhich of these might be used in underwater naval operations?",
+        "options": [
+            "Frogmen",
+            "Newtmen",
+            "Toadmen",
+            "Tadpolemen"
+        ],
+        "answer": 0
     }
 ]
