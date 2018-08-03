@@ -83,6 +83,12 @@ class Quiz extends React.Component {
                     value="Answer" 
                     className="App-AnswerButton" 
                 />
+                <Button 
+                    onClick={1} 
+                    isDisabled={1} 
+                    value="Next" 
+                    className="App-NextButton" 
+                />
                 <Result showResult={this.state.showResult} isRightAnswer={this.state.isRightAnswer} answer={q.options[q.answer]}/>
             </div>
         )
