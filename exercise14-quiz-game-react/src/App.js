@@ -44,6 +44,7 @@ class Quiz extends React.Component {
         super(props);
         this.handleAnswerOptionsClick = this.handleAnswerOptionsClick.bind(this);
         this.handleAnswerButtonClick = this.handleAnswerButtonClick.bind(this);
+        this.handleNextButtonClick = this.handleNextButtonClick.bind(this);
         this.state = {
             questionNumber: 0,
             selectedAnswer: null,
@@ -69,6 +70,11 @@ class Quiz extends React.Component {
         }
     }
 
+    handleNextButtonClick() {
+        const nextQuestion = this.state.questionNumber + 1;
+        this.setState({ questionNumber: nextQuestion });
+    }
+
     render() {
         const q = this.props.questions[this.state.questionNumber]
 
@@ -79,13 +85,13 @@ class Quiz extends React.Component {
                 <AnswerOptions options={q.options} onClick={this.handleAnswerOptionsClick} />
                 <Button 
                     onClick={this.handleAnswerButtonClick} 
-                    isDisabled={this.state.selectedAnswer === null} 
+                    isDisabled={this.state.selectedAnswer === null || this.state.showResult} 
                     value="Answer" 
                     className="App-AnswerButton" 
                 />
                 <Button 
-                    onClick={1} 
-                    isDisabled={1} 
+                    onClick={this.handleNextButtonClick} 
+                    isDisabled={!this.state.showResult} 
                     value="Next" 
                     className="App-NextButton" 
                 />
