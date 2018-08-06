@@ -62,11 +62,11 @@ class Quiz extends React.Component {
     }
 
     handleAnswerButtonClick = () => {
-        const s = this.state
+        const state = this.state
 
-        if (s.selectedAnswer !== null) {
+        if (state.selectedAnswer !== null) {
             const isRight =
-                (s.selectedAnswer === this.props.questions[s.questionNumber].answer)
+                (state.selectedAnswer === this.props.questions[state.questionNumber].answer)
 
             this.setState((prevState) => ({
                 showResult: true,
@@ -94,8 +94,8 @@ class Quiz extends React.Component {
     }
 
     render() {
-        const q = this.props.questions[this.state.questionNumber]
-
+        const question = this.props.questions[this.state.questionNumber]
+        
         if (this.state.isGameOver) {
             return (
                 <div>
@@ -113,8 +113,8 @@ class Quiz extends React.Component {
         return (
             <div>
                 <h2 className="App-QuestionNumber">Question #{this.state.questionNumber + 1}</h2>
-                <p className="App-QuestionDescription">{q.description}</p>
-                <AnswerOptions options={q.options} onClick={this.handleAnswerOptionsClick} selected={this.state.selectedAnswer} />
+                <p className="App-QuestionDescription">{question.description}</p>
+                <AnswerOptions options={question.options} onClick={this.handleAnswerOptionsClick} selected={this.state.selectedAnswer} />
                 <Button 
                     onClick={this.handleAnswerButtonClick} 
                     isDisabled={this.state.selectedAnswer === null || this.state.showResult} 
@@ -127,7 +127,7 @@ class Quiz extends React.Component {
                     value="Next" 
                     className="App-NextButton" 
                 />
-                <Result showResult={this.state.showResult} isRightAnswer={this.state.isRightAnswer} answer={q.options[q.answer]}/>
+                <Result showResult={this.state.showResult} isRightAnswer={this.state.isRightAnswer} answer={question.options[question.answer]}/>
             </div>
         )
     }
