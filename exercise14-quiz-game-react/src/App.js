@@ -2,32 +2,43 @@ import React from 'react';
 import './App.css';
 import questionsData from './questions-data.json';
 
-function AnswerOptions(props) {
-    const options = props.options.map((value, index) => {
-        return (
-            <div key={index}>
-                <input
+function RadioButton(props) {
+    return (
+        <div>
+            <input
                     type="radio"
-                    value={value}
-                    onClick={() => props.onClick(index)}
-                    checked={props.selected === index}
+                    value={props.value}
+                    onClick={props.onClick}
+                    checked={props.checked}
                 />
-                {value}
-            </div>
-        );
-    });
+            {props.value}
+        </div>
+    );
+}
 
-    return <ul>{options}</ul>;
+function RadioButtonList(props) {
+    return (
+        <ul>
+            {props.options.map((value, index) => 
+                    <RadioButton
+                        key={index} 
+                        value={value}
+                        onClick={() => props.onClick(index)}
+                        checked={props.selected === index}
+                    />
+            )}
+        </ul>
+    );
 }
 
 function Result(props) {
     if (props.showResult) {
         if (props.isRightAnswer) {
-            return <p>Correct Answer!</p>
+            return <p>Correct Answer!</p>;
         }
-        return <p>Wrong answer, correct one is: {props.answer}</p>
+        return <p>Wrong answer, correct one is: {props.answer}</p>;
     }
-    return <p>Waiting for answer...</p>
+    return <p>Waiting for answer...</p>;
 }
 
 function Button(props) {
@@ -62,11 +73,11 @@ class Quiz extends React.Component {
     }
 
     handleAnswerButtonClick = () => {
-        const state = this.state
+        const state = this.state;
 
         if (state.selectedAnswer !== null) {
             const isRight =
-                (state.selectedAnswer === this.props.questions[state.questionNumber].answer)
+                (state.selectedAnswer === this.props.questions[state.questionNumber].answer);
 
             this.setState((prevState) => ({
                 showResult: true,
@@ -86,7 +97,7 @@ class Quiz extends React.Component {
                 showResult: false,
                 isRightAnswer: false
             }));
-        };
+        }
     }
 
     handleRestartButtonClick = () => {
@@ -94,7 +105,7 @@ class Quiz extends React.Component {
     }
 
     render() {
-        const question = this.props.questions[this.state.questionNumber]
+        const question = this.props.questions[this.state.questionNumber];
 
         const resultView = (
             <div>
@@ -112,7 +123,7 @@ class Quiz extends React.Component {
             <div>
                 <h2 className="App-QuestionNumber">Question #{this.state.questionNumber + 1}</h2>
                 <p className="App-QuestionDescription">{question.description}</p>
-                <AnswerOptions options={question.options} onClick={this.handleAnswerOptionsClick} selected={this.state.selectedAnswer} />
+                <RadioButtonList options={question.options} onClick={this.handleAnswerOptionsClick} selected={this.state.selectedAnswer} />
                 <Button
                     onClick={this.handleAnswerButtonClick}
                     isDisabled={this.state.selectedAnswer === null || this.state.showResult}
@@ -127,7 +138,7 @@ class Quiz extends React.Component {
                 />
                 <Result showResult={this.state.showResult} isRightAnswer={this.state.isRightAnswer} answer={question.options[question.answer]} />
             </div>
-        )
+        );
 
         return this.state.isGameOver ? resultView : questionView;
     }
@@ -138,7 +149,7 @@ class App extends React.Component {
         super(props);
         this.state = {
             questions: questionsData,
-        }
+        };
     }
 
     render() {
