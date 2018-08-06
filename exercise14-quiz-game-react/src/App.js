@@ -48,7 +48,7 @@ RadioButtonList.propTypes = {
     selected: PropTypes.number,
 };
 
-function Result(props) {
+function Answer(props) {
     if (props.showResult) {
         if (props.isRightAnswer) {
             return <p>Correct Answer!</p>;
@@ -58,7 +58,7 @@ function Result(props) {
     return <p>Waiting for answer...</p>;
 }
 
-Result.propTypes = {
+Answer.propTypes = {
     showResult: PropTypes.bool.isRequired,
     isRightAnswer: PropTypes.bool.isRequired,
     answer: PropTypes.string.isRequired,
@@ -85,6 +85,27 @@ Button.defaultProps = {
     value: '',
     isDisabled: false,
 };
+
+function ResultView(props) {
+    return (
+        <div>
+            <h2 className="App-GameOver">Game Over!</h2>
+            <h3>Your score: {props.score}</h3>
+            <Button
+                onClick={props.onRestart}
+                isDisabled={false}
+                value="Restart"
+                className="App-RestartButton"
+            />
+        </div>
+    );
+}
+
+ResultView.propTypes = {
+    score: PropTypes.number.isRequired,
+    onRestart: PropTypes.func.isRequired,
+};
+
 
 class Quiz extends React.Component {
     constructor(props) {
@@ -143,15 +164,10 @@ class Quiz extends React.Component {
         const question = this.props.questions[this.state.questionNumber];
 
         const resultView = (
-            <div>
-                <h2 className="App-QuestionNumber">Game Over! Your score: {this.state.score}</h2>
-                <Button
-                    onClick={this.handleRestartButtonClick}
-                    isDisabled={false}
-                    value="Restart"
-                    className="App-RestartButton"
-                />
-            </div>
+            <ResultView 
+                score={this.state.score}
+                onRestart={this.handleRestartButtonClick}
+            />
         );
 
         const questionView = (
@@ -171,7 +187,7 @@ class Quiz extends React.Component {
                     value="Next"
                     className="App-NextButton"
                 />
-                <Result showResult={this.state.showResult} isRightAnswer={this.state.isRightAnswer} answer={question.options[question.answer]} />
+                <Answer showResult={this.state.showResult} isRightAnswer={this.state.isRightAnswer} answer={question.options[question.answer]} />
             </div>
         );
 
