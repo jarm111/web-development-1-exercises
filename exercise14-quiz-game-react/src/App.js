@@ -80,7 +80,7 @@ class Quiz extends React.Component {
         if (this.state.questionNumber === this.props.questions.length - 1) {
             this.setState({ isGameOver: true });
         } else {
-            this.setState((prevState) => ({ 
+            this.setState((prevState) => ({
                 questionNumber: prevState.questionNumber + 1,
                 selectedAnswer: null,
                 showResult: false,
@@ -95,41 +95,41 @@ class Quiz extends React.Component {
 
     render() {
         const question = this.props.questions[this.state.questionNumber]
-        
-        if (this.state.isGameOver) {
-            return (
-                <div>
-                    <h2 className="App-QuestionNumber">Game Over! Your score: {this.state.score}</h2>
-                    <Button
-                        onClick={this.handleRestartButtonClick} 
-                        isDisabled={false} 
-                        value="Restart" 
-                        className="App-RestartButton" 
-                    />
-                </div>
-            )
-        }
 
-        return (
+        const resultView = (
+            <div>
+                <h2 className="App-QuestionNumber">Game Over! Your score: {this.state.score}</h2>
+                <Button
+                    onClick={this.handleRestartButtonClick}
+                    isDisabled={false}
+                    value="Restart"
+                    className="App-RestartButton"
+                />
+            </div>
+        );
+
+        const questionView = (
             <div>
                 <h2 className="App-QuestionNumber">Question #{this.state.questionNumber + 1}</h2>
                 <p className="App-QuestionDescription">{question.description}</p>
                 <AnswerOptions options={question.options} onClick={this.handleAnswerOptionsClick} selected={this.state.selectedAnswer} />
-                <Button 
-                    onClick={this.handleAnswerButtonClick} 
-                    isDisabled={this.state.selectedAnswer === null || this.state.showResult} 
-                    value="Answer" 
-                    className="App-AnswerButton" 
+                <Button
+                    onClick={this.handleAnswerButtonClick}
+                    isDisabled={this.state.selectedAnswer === null || this.state.showResult}
+                    value="Answer"
+                    className="App-AnswerButton"
                 />
-                <Button 
-                    onClick={this.handleNextButtonClick} 
-                    isDisabled={!this.state.showResult} 
-                    value="Next" 
-                    className="App-NextButton" 
+                <Button
+                    onClick={this.handleNextButtonClick}
+                    isDisabled={!this.state.showResult}
+                    value="Next"
+                    className="App-NextButton"
                 />
-                <Result showResult={this.state.showResult} isRightAnswer={this.state.isRightAnswer} answer={question.options[question.answer]}/>
+                <Result showResult={this.state.showResult} isRightAnswer={this.state.isRightAnswer} answer={question.options[question.answer]} />
             </div>
         )
+
+        return this.state.isGameOver ? resultView : questionView;
     }
 }
 
