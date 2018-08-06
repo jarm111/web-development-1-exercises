@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import questionsData from './questions-data.json';
+import PropTypes from 'prop-types';
 
 function RadioButton(props) {
     return (
@@ -15,6 +16,17 @@ function RadioButton(props) {
         </div>
     );
 }
+
+RadioButton.defaultProps = {
+    value: '',
+    checked: false,
+};
+
+RadioButton.propTypes = {
+    value: PropTypes.string,
+    onClick: PropTypes.func,
+    checked: PropTypes.bool,
+};
 
 function RadioButtonList(props) {
     return (
@@ -31,6 +43,11 @@ function RadioButtonList(props) {
     );
 }
 
+RadioButtonList.propTypes = {
+    options: PropTypes.array.isRequired,
+    selected: PropTypes.number,
+};
+
 function Result(props) {
     if (props.showResult) {
         if (props.isRightAnswer) {
@@ -41,6 +58,12 @@ function Result(props) {
     return <p>Waiting for answer...</p>;
 }
 
+Result.propTypes = {
+    showResult: PropTypes.bool.isRequired,
+    isRightAnswer: PropTypes.bool.isRequired,
+    answer: PropTypes.string.isRequired,
+};
+
 function Button(props) {
     return <input
         className={props.className}
@@ -50,6 +73,18 @@ function Button(props) {
         disabled={props.isDisabled}
     />;
 }
+
+Button.propTypes = {
+    className: PropTypes.string,
+    onClick: PropTypes.func,
+    value: PropTypes.string,
+    isDisabled: PropTypes.bool,
+};
+
+Button.defaultProps = {
+    value: '',
+    isDisabled: false,
+};
 
 class Quiz extends React.Component {
     constructor(props) {
@@ -143,6 +178,10 @@ class Quiz extends React.Component {
         return this.state.isGameOver ? resultView : questionView;
     }
 }
+
+Quiz.propTypes = {
+    questions: PropTypes.array.isRequired,
+};
 
 class App extends React.Component {
     constructor(props) {
