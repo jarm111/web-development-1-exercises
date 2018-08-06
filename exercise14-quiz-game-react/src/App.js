@@ -63,19 +63,16 @@ class Quiz extends React.Component {
 
     handleAnswerButtonClick = () => {
         const s = this.state
-        let newScore = this.state.score;
 
         if (s.selectedAnswer !== null) {
             const isRight =
                 (s.selectedAnswer === this.props.questions[s.questionNumber].answer)
 
-            if (isRight) newScore += 1;
-
-            this.setState({
+            this.setState((prevState) => ({
                 showResult: true,
                 isRightAnswer: isRight,
-                score: newScore
-            });
+                score: isRight ? prevState.score + 1 : prevState.score
+            }));
         }
     }
 
@@ -83,13 +80,13 @@ class Quiz extends React.Component {
         if (this.state.questionNumber === this.props.questions.length - 1) {
             this.setState({ isGameOver: true });
         } else {
-        const nextQuestion = this.state.questionNumber + 1;
-        this.setState({ 
-            questionNumber: nextQuestion,
-            selectedAnswer: null,
-            showResult: false,
-            isRightAnswer: false
-        })};
+            this.setState((prevState) => ({ 
+                questionNumber: prevState.questionNumber + 1,
+                selectedAnswer: null,
+                showResult: false,
+                isRightAnswer: false
+            }));
+        };
     }
 
     handleRestartButtonClick = () => {
