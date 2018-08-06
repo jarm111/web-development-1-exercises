@@ -8,16 +8,16 @@ function AnswerOptions(props) {
             <div key={index}>
                 <input
                     type="radio"
-                    name="option"
-                    value={index}
+                    value={value}
                     onClick={() => props.onClick(index)}
                     checked={props.selected === index}
-                />{value}
+                />
+                {value}
             </div>
         );
-    })
+    });
 
-    return <ul>{options}</ul>
+    return <ul>{options}</ul>;
 }
 
 function Result(props) {
