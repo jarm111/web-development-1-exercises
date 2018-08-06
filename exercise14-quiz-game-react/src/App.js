@@ -49,7 +49,7 @@ RadioButtonList.propTypes = {
 };
 
 function Answer(props) {
-    if (props.showResult) {
+    if (props.showAnswer) {
         if (props.isRightAnswer) {
             return <p>Correct Answer!</p>;
         }
@@ -59,7 +59,7 @@ function Answer(props) {
 }
 
 Answer.propTypes = {
-    showResult: PropTypes.bool.isRequired,
+    showAnswer: PropTypes.bool.isRequired,
     isRightAnswer: PropTypes.bool.isRequired,
     answer: PropTypes.string.isRequired,
 };
@@ -106,6 +106,83 @@ ResultView.propTypes = {
     onRestart: PropTypes.func.isRequired,
 };
 
+class QuestionView extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = this.getInitialState();
+    }
+
+    getInitialState = () => {
+        return {
+            selectedAnswer: null,
+            showAnswer: false,
+            isRightAnswer: false,
+        };
+    }
+
+    handleAnswerOptionsClick = (selection) => {
+        this.setState({ selectedAnswer: selection });
+    }
+
+    handleAnswerButtonClick = () => {
+        if (this.state.selectedAnswer !== null) {
+            const isRight =
+                (this.state.selectedAnswer === this.props.question.answer);
+
+            isRight && this.props.onRightAnswer();
+
+            this.setState((prevState) => ({
+                showAnswer: true,
+                isRightAnswer: isRight,
+            }));
+        }
+    }
+
+    handleNextButtonClick = () => {
+        this.setState(this.getInitialState());
+        this.props.onNextQuestion();
+    }
+
+    render() {
+        const question = this.props.question;
+
+        return (
+            <div className="App-QuestionView">
+                <h2 className="App-QuestionNumber">Question #{this.props.questionNumber}</h2>
+                <p className="App-QuestionDescription">{question.description}</p>
+                <RadioButtonList 
+                    options={question.options} 
+                    onClick={this.handleAnswerOptionsClick} 
+                    selected={this.state.selectedAnswer} 
+                />
+                <Button
+                    onClick={this.handleAnswerButtonClick}
+                    isDisabled={this.state.selectedAnswer === null || this.state.showAnswer}
+                    value="Answer"
+                    className="App-AnswerButton"
+                />
+                <Button
+                    onClick={this.handleNextButtonClick}
+                    isDisabled={!this.state.showAnswer}
+                    value="Next"
+                    className="App-NextButton"
+                />
+                <Answer 
+                    showAnswer={this.state.showAnswer} 
+                    isRightAnswer={this.state.isRightAnswer} 
+                    answer={question.options[question.answer]} 
+                />
+            </div>
+        );
+    }
+}
+
+QuestionView.propTypes = {
+    question: PropTypes.object.isRequired,
+    questionNumber: PropTypes.number.isRequired,
+    onRightAnswer: PropTypes.func.isRequired,
+    onNextQuestion: PropTypes.func.isRequired,
+};
 
 class Quiz extends React.Component {
     constructor(props) {
@@ -116,42 +193,23 @@ class Quiz extends React.Component {
     getInitialState = () => {
         return {
             questionNumber: 0,
-            selectedAnswer: null,
-            showResult: false,
-            isRightAnswer: false,
             score: 0,
             isGameOver: false,
         };
     }
 
-    handleAnswerOptionsClick = (selection) => {
-        this.setState({ selectedAnswer: selection });
+    increaseScore = () => {
+        this.setState((prevState) => ({
+            score: prevState.score + 1
+        }));
     }
 
-    handleAnswerButtonClick = () => {
-        const state = this.state;
-
-        if (state.selectedAnswer !== null) {
-            const isRight =
-                (state.selectedAnswer === this.props.questions[state.questionNumber].answer);
-
-            this.setState((prevState) => ({
-                showResult: true,
-                isRightAnswer: isRight,
-                score: isRight ? prevState.score + 1 : prevState.score
-            }));
-        }
-    }
-
-    handleNextButtonClick = () => {
+    handleNextQuestion = () => {
         if (this.state.questionNumber === this.props.questions.length - 1) {
             this.setState({ isGameOver: true });
         } else {
             this.setState((prevState) => ({
                 questionNumber: prevState.questionNumber + 1,
-                selectedAnswer: null,
-                showResult: false,
-                isRightAnswer: false
             }));
         }
     }
@@ -161,8 +219,6 @@ class Quiz extends React.Component {
     }
 
     render() {
-        const question = this.props.questions[this.state.questionNumber];
-
         const resultView = (
             <ResultView 
                 score={this.state.score}
@@ -171,24 +227,12 @@ class Quiz extends React.Component {
         );
 
         const questionView = (
-            <div>
-                <h2 className="App-QuestionNumber">Question #{this.state.questionNumber + 1}</h2>
-                <p className="App-QuestionDescription">{question.description}</p>
-                <RadioButtonList options={question.options} onClick={this.handleAnswerOptionsClick} selected={this.state.selectedAnswer} />
-                <Button
-                    onClick={this.handleAnswerButtonClick}
-                    isDisabled={this.state.selectedAnswer === null || this.state.showResult}
-                    value="Answer"
-                    className="App-AnswerButton"
-                />
-                <Button
-                    onClick={this.handleNextButtonClick}
-                    isDisabled={!this.state.showResult}
-                    value="Next"
-                    className="App-NextButton"
-                />
-                <Answer showResult={this.state.showResult} isRightAnswer={this.state.isRightAnswer} answer={question.options[question.answer]} />
-            </div>
+            <QuestionView 
+                question={this.props.questions[this.state.questionNumber]}
+                questionNumber={this.state.questionNumber + 1}
+                onRightAnswer={this.increaseScore}
+                onNextQuestion={this.handleNextQuestion}
+            />
         );
 
         return this.state.isGameOver ? resultView : questionView;
