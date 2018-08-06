@@ -43,15 +43,11 @@ function Button(props) {
 class Quiz extends React.Component {
     constructor(props) {
         super(props);
-        this.handleAnswerOptionsClick = this.handleAnswerOptionsClick.bind(this);
-        this.handleAnswerButtonClick = this.handleAnswerButtonClick.bind(this);
-        this.handleNextButtonClick = this.handleNextButtonClick.bind(this);
-        this.handleRestartButtonClick = this.handleRestartButtonClick.bind(this);
         this.state = this.getInitialState();
     }
 
     getInitialState = () => {
-        const initialState = {
+        return {
             questionNumber: 0,
             selectedAnswer: null,
             showResult: false,
@@ -59,14 +55,13 @@ class Quiz extends React.Component {
             score: 0,
             isGameOver: false,
         };
-        return initialState;
     }
 
-    handleAnswerOptionsClick(selection) {
+    handleAnswerOptionsClick = (selection) => {
         this.setState({ selectedAnswer: selection });
     }
 
-    handleAnswerButtonClick() {
+    handleAnswerButtonClick = () => {
         const s = this.state
         let newScore = this.state.score;
 
@@ -84,7 +79,7 @@ class Quiz extends React.Component {
         }
     }
 
-    handleNextButtonClick() {
+    handleNextButtonClick = () => {
         if (this.state.questionNumber === this.props.questions.length - 1) {
             this.setState({ isGameOver: true });
         } else {
@@ -97,7 +92,7 @@ class Quiz extends React.Component {
         })};
     }
 
-    handleRestartButtonClick() {
+    handleRestartButtonClick = () => {
         this.setState(this.getInitialState());
     }
 
