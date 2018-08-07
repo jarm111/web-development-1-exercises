@@ -3,6 +3,9 @@ import './App.css';
 import questionsData from './questions-data.json';
 import Quiz from './components/Quiz';
 
+/**
+ * Renders the app and passes Quiz the question data
+ */
 class App extends React.Component {
     constructor(props) {
         super(props);

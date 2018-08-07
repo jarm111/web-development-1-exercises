@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import ResultView from './ResultView';
 import QuestionView from './QuestionView';
 
+/**
+ * Runs the Quiz game and keeps the overall game state
+ */
 class Quiz extends React.Component {
     constructor(props) {
         super(props);

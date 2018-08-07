@@ -4,6 +4,9 @@ import RadioButtonList from './RadioButtonList';
 import Answer from './Answer';
 import Button from './Button';
 
+/**
+ * Handles the view where questions, options and answers are displayed and keeps the current question state
+ */
 class QuestionView extends React.Component {
     constructor(props) {
         super(props);
