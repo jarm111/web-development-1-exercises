@@ -8,6 +8,7 @@ import { MessageService } from '../message.service'
 })
 export class MessagesComponent implements OnInit {
 
+  // Angular only binds to public component properties
   constructor(public messageService: MessageService) { }
 
   ngOnInit() {

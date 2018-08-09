@@ -9,13 +9,19 @@ import { HeroService }  from '../hero.service';
   templateUrl: './hero-detail.component.html',
   styleUrls: ['./hero-detail.component.css']
 })
+
 export class HeroDetailComponent implements OnInit {
 
+  // The hero property must be an Input property, 
+  // annotated with the @Input() decorator, 
+  // because the external HeroesComponent will bind to it
   @Input() hero: Hero;
 
   constructor(
+    // ActivatedRoute holds information about the route to this instance of the HeroDetailComponent
     private route: ActivatedRoute,
     private heroService: HeroService,
+    // location is an Angular service for interacting with the browser
     private location: Location
   ) { }
 

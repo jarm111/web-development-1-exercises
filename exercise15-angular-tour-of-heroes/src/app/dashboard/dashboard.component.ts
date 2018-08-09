@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
     this.getHeroes();
   }
 
+  // This getHeroes reduces the number of heroes displayed to four
   getHeroes(): void {
     this.heroService.getHeroes()
       .subscribe(heroes => this.heroes = heroes.slice(1,5));
