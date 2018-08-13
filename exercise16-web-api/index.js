@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $.getJSON('https://www.googleapis.com/books/v1/volumes?q=javascript', function (data) {
+    $.getJSON('https://www.googleapis.com/books/v1/volumes?q=javascript&langRestrict=en', function (data) {
         for (var i = 0; i < data.items.length; i++) {
             var vol = data.items[i].volumeInfo;
             bookToRowModule.insertBook(i, vol.title, vol.subtitle, vol.authors, vol.publishedDate, vol.description);
@@ -26,7 +26,7 @@ var bookToRowModule = (function () {
     }
     
     function formatTitle(title, subtitle) {
-        if (subtitle) {
+        if (subtitle && !title.includes(subtitle)) {
             return title + ' - ' + subtitle;
         }
         
