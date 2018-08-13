@@ -13,9 +13,25 @@
 
 <body>
     <div class="container">
-        <h1>JavaScript Books</h1>
-        <p>Source: Google Books API</p>
+        <header>
+                <h1>JavaScript Books</h1>
+                <p>Source: Google Books API</p>
+        </header>
         <div id="content"></div>
+        <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author(s)</th>
+                    <th scope="col">Published</th>
+                    <th scope="col">Description</th>
+                  </tr>
+                </thead>
+                <tbody id="books">
+                  
+                </tbody>
+              </table>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
