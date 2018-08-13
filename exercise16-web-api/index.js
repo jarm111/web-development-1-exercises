@@ -1,28 +1,48 @@
-
 $(document).ready(function () {
     $.getJSON('https://www.googleapis.com/books/v1/volumes?q=javascript', function (data) {
         for (var i = 0; i < data.items.length; i++) {
-            // var item = data.items[i];
-            // $('#content').append('<br>' + item.volumeInfo.title);
             var vol = data.items[i].volumeInfo;
-            appendBooks(i, vol.title, vol.authors[0], vol.publishedDate, vol.description);
+            appendBooks(i, vol.title, vol.subtitle, vol.authors, vol.publishedDate, vol.description);
         }
         console.log(data);
     });
 });
 
-function appendBooks(tableRowIndex, title, author, date, description) {
+function appendBooks(tableRowIndex, title, subTitle, authors, date, description) {
     $('#books').append(
         '<tr><th scope="row">'
         + ++tableRowIndex +
         '</th><td>'
-         + title +
+         + formatTitle(title, subTitle) +
          '</td><td>'
-         + author +
+         + formatAuthors(authors) +
          '</td><td>'
-         + date +
+         + getYearFromDate(date) +
          '</td><td>'
-         + description +
+         + formatDescription(description, 200) +
          '</td></tr>'
     );
+}
+
+function formatTitle(title, subtitle) {
+    if (subtitle) {
+        return title + ' - ' + subtitle;
+    }
+    
+    return title;
+}
+
+function formatAuthors(authors) {
+    return authors.join(', ');
+}
+
+function getYearFromDate(date) {
+    return new Date(date).getFullYear();
+}
+
+function formatDescription(description, maxLength) {
+    if (description.length > maxLength) {  
+        return description.substring(0, maxLength) + '...';
+    }
+    return description;
 }
