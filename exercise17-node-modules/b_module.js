@@ -1,3 +1,6 @@
+/*
+ * Export prototype
+ */
 var MyClass = function() {};
 
 MyClass.prototype.randomNumber = function(min, max) {

@@ -1,3 +1,6 @@
+/*
+ * Export anonymous object
+ */
 var MyClass = function() {};
 
 MyClass.prototype.randomNumber = function(min, max) {

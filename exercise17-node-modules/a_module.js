@@ -1,3 +1,6 @@
+/*
+ * Export anonymous function
+ */
 module.exports = function (min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
