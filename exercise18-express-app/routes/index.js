@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var fs = require('fs');
 
 var sess;
 var password = 'asdf';
@@ -39,9 +40,13 @@ router.get('/upload', function (req, res) {
 router.get('/files', function (req, res) {
     sess = req.session; //laitetaan sessio-olio muuttujaan sess
     //tätä sivua ei ole suojattu salasanalla, mutta sessiossa ollaan silti
+    var files = fs.readdirSync('uploads/');
+    console.log(files);
     res.render('files', {
         title: 'Olet nyt sessiossa sivulla files!',
-        sessid: sess.id
+        sessid: sess.id,
+        files: files,
+        filePath: '../uploads/'
     }); //salainen sivu
 });
 
@@ -64,6 +69,26 @@ router.post('/login', function (req, res) {
     sess.email = req.body.email; //sess.email saa arvon login-sivulta (index.ejs)
     sess.pass = req.body.pass;////sess.pass saa arvon login-sivulta (index.ejs)
     res.end('done'); //response eli vastaus on 'done' ja se saadaan login-sivulle
+});
+
+router.post('/uploadfile', function (req, res) {
+    if (!req.files) {
+        return res.status(400).send('No files were uploaded.');
+    }
+
+    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+    var sampleFile = req.files.sampleFile;
+    var fileName = req.files.sampleFile.name;
+    var uploadPath = './uploads/' + fileName;
+
+    // Use the mv() method to place the file somewhere on your server
+    sampleFile.mv(uploadPath, function (err) {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.redirect('/files');
+        // res.send('File uploaded!');
+    });
 });
 
 module.exports = router;

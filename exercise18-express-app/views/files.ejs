@@ -19,6 +19,15 @@
     <p>Session id on
         <%= sessid %>
     </p>
+    <h2>Files:</h2>
+    <ul>
+        <% files.forEach(function(fileName) { %>
+            <li>
+                <a href="<%= filePath %><%= fileName %>" download="<%= fileName %>"><%= fileName %></a>
+            </li>
+        <% }); %>
+      </ul>
+    
 
 </body>
 

@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var session = require('express-session');
+var fileUpload = require('express-fileupload');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
   salasana oikea ja jos on, päästetään käyttäjä sivulle.
 */
 app.use(session({ secret: 'salausarvo', cookie: { maxAge: 60000 }, resave: true, saveUninitialized: true }));
+app.use(fileUpload());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
