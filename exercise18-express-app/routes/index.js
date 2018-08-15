@@ -2,12 +2,13 @@ var express = require('express');
 var router = express.Router();
 
 var sess;
+var password = 'asdf';
 
 /* Kun tullaan juureen tehdään nämä jutut */
 router.get('/', function (req, res, next) {
     sess = req.session; //laitetaan sessio-olio muuttujaan sess
 
-    if (sess.pass === 'qwerty') {
+    if (sess.pass === password) {
         res.redirect('/salasivu1'); //salainen sivu
     } else {
         res.render('index', {
@@ -20,7 +21,7 @@ router.get('/', function (req, res, next) {
 router.get('/salasivu1', function (req, res) {
     sess = req.session; //laitetaan sessio-olio muuttujaan sess
     //sivu on suojattu salasanalla. Sen voisi hakea ulkoisesta tiedostosta tai kannasta
-    if (sess.pass === 'qwerty') {
+    if (sess.pass === password) {
         res.render('salasivu1', {
             title: 'Olet nyt sessiossa sivulla salasivu1!',
             sessid: sess.id
