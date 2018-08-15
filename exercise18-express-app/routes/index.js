@@ -15,6 +15,7 @@ router.get('/', function (req, res, next) {
             title: 'Express sessioesimerkki'
         }); //kirjautumissivu
     }
+    next();
 });
 
 //reitti salasivu1-sivulle
