@@ -9,7 +9,7 @@ router.get('/', function (req, res, next) {
     sess = req.session; //laitetaan sessio-olio muuttujaan sess
 
     if (sess.pass === password) {
-        res.redirect('/salasivu1'); //salainen sivu
+        res.redirect('/upload'); //salainen sivu
     } else {
         res.render('index', {
             title: 'Express sessioesimerkki'
@@ -18,13 +18,13 @@ router.get('/', function (req, res, next) {
     next();
 });
 
-//reitti salasivu1-sivulle
-router.get('/salasivu1', function (req, res) {
+//reitti upload-sivulle
+router.get('/upload', function (req, res) {
     sess = req.session; //laitetaan sessio-olio muuttujaan sess
     //sivu on suojattu salasanalla. Sen voisi hakea ulkoisesta tiedostosta tai kannasta
     if (sess.pass === password) {
-        res.render('salasivu1', {
-            title: 'Olet nyt sessiossa sivulla salasivu1!',
+        res.render('upload', {
+            title: 'Olet nyt sessiossa sivulla upload!',
             sessid: sess.id
         });
     }
@@ -35,12 +35,12 @@ router.get('/salasivu1', function (req, res) {
     }
 });
 
-//reitti salasivu2-sivulle
-router.get('/salasivu2', function (req, res) {
+//reitti files-sivulle
+router.get('/files', function (req, res) {
     sess = req.session; //laitetaan sessio-olio muuttujaan sess
     //tätä sivua ei ole suojattu salasanalla, mutta sessiossa ollaan silti
-    res.render('salasivu2', {
-        title: 'Olet nyt sessiossa sivulla salasivu2!',
+    res.render('files', {
+        title: 'Olet nyt sessiossa sivulla files!',
         sessid: sess.id
     }); //salainen sivu
 });

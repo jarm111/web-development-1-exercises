@@ -10,7 +10,7 @@
 
 <body>
     <p>
-        <a href="/salasivu1">salasivu1</a> |
+        <a href="/files">files</a> |
         <a href="/logout">logout</a>
     </p>
     <h1>
@@ -19,6 +19,14 @@
     <p>Session id on
         <%= sessid %>
     </p>
+    <form ref='uploadForm' 
+      id='uploadForm' 
+      action='http://localhost:8000/upload' 
+      method='post' 
+      encType="multipart/form-data">
+        <input type="file" name="sampleFile" />
+        <input type='submit' value='Upload!' />
+    </form>     
 
 </body>
 
