@@ -2,7 +2,7 @@ var db = require('../dbconnection');
 
 var Task = {
     getAllTasks: function(callback) {
-        return db.query('SELECT * FROM tasks', callback);
+        return db.query('SELECT * FROM task', callback);
     },
 
     getTaskById: function(id, callback) {
