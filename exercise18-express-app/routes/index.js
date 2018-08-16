@@ -13,7 +13,8 @@ router.get('/', function (req, res, next) {
         res.redirect('/upload'); //salainen sivu
     } else {
         res.render('index', {
-            title: 'Express sessioesimerkki'
+            title: 'Exercise 18 - Express File Upload/Download Site',
+            password: password
         }); //kirjautumissivu
     }
     next();
@@ -25,13 +26,14 @@ router.get('/upload', function (req, res) {
     //sivu on suojattu salasanalla. Sen voisi hakea ulkoisesta tiedostosta tai kannasta
     if (sess.pass === password) {
         res.render('upload', {
-            title: 'Olet nyt sessiossa sivulla upload!',
+            title: 'Session page: Upload!',
             sessid: sess.id
         });
     }
     else {
         res.render('error', {// jos passu väärä, mennään error-sivulle
-            message: 'Et ole kirjautunut tai salasanasi on väärä',
+            message: 'You have not logged in or the password is incorrect.',
+            error: 500,
         });
     }
 });
@@ -43,7 +45,7 @@ router.get('/files', function (req, res) {
     var files = fs.readdirSync('uploads/');
     console.log(files);
     res.render('files', {
-        title: 'Olet nyt sessiossa sivulla files!',
+        title: 'Session page: Files Download!',
         sessid: sess.id,
         files: files,
         filePath: '../uploads/'
