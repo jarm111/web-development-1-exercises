@@ -26,7 +26,7 @@ router.get('/upload', function (req, res) {
     //sivu on suojattu salasanalla. Sen voisi hakea ulkoisesta tiedostosta tai kannasta
     if (sess.pass === password) {
         res.render('upload', {
-            title: 'Session page: Upload!',
+            title: 'Session page: File Upload!',
             sessid: sess.id
         });
     }
