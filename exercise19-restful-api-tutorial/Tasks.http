@@ -1,5 +1,29 @@
+@id = 6
+
 ### Get all values
-GET http://localhost:3000/Tasks
+GET http://localhost:3000/Tasks/
 
 ### Get defined value
-GET http://localhost:3000/Tasks/1
+GET http://localhost:3000/Tasks/{{id}}
+
+### Create model
+POST http://localhost:3000/Tasks/
+content-type: application/json
+
+{
+    "Id": "6",
+    "Title": "Learn to make REST API with Express",
+    "Status": "pending"
+}
+
+### Update model
+PUT http://localhost:3000/Tasks/{{id}}
+content-type: application/json
+ 
+{
+    "Title": "Learn to make REST API with Express",
+    "Status": "done"
+}
+
+### Delete value
+DELETE http://localhost:3000/Tasks/{{id}}
