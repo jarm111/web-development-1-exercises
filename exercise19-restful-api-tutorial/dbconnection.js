@@ -8,7 +8,7 @@ var connection = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'rest_api_tutorial'
+    database: 'websk1'
 });
 
 module.exports = connection;
