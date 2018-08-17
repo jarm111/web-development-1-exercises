@@ -30,7 +30,9 @@ router.post('/', function(req, res, next) {
             res.json(req.body);
         }
     });
+});
 
+router.delete('/:id', function(req, res, next) {
     Task.deleteTask(req.params.id, function(err, count) {
         if (err) {
             res.json(err);
