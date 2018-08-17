@@ -1,3 +1,7 @@
+/**
+ * Task model. Provides methods for the API that make db-queries.
+ */
+
 var db = require('../dbconnection');
 
 var Task = {

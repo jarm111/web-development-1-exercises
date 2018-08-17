@@ -1,3 +1,7 @@
+/**
+ * REST API routes, has GET, POST, UPDATE DELETE methods.
+ */
+
 var express = require('express');
 var router = express.Router();
 var Task = require('../models/Task');

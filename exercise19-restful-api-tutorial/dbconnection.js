@@ -1,3 +1,7 @@
+/**
+ * Establish the database connection
+ */
+
 var mysql = require('mysql');
 
 var connection = mysql.createPool({
