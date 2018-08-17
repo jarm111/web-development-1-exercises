@@ -17,7 +17,6 @@ router.get('/', function (req, res, next) {
             password: password
         }); //kirjautumissivu
     }
-    next();
 });
 
 //reitti upload-sivulle
