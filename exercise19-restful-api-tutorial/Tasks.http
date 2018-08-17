@@ -1,0 +1,5 @@
+### Get all values
+GET http://localhost:3000/Tasks
+
+### Get defined value
+GET http://localhost:3000/Tasks/1
