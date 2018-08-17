@@ -20,7 +20,6 @@ router.get('/:id?', function(req, res, next) {
             }
         });
     }
-    next();
 });
 
 router.post('/', function(req, res, next) {
@@ -39,7 +38,6 @@ router.post('/', function(req, res, next) {
             res.json(count);
         }
     });
-    next();
 });
 
 router.put('/:id', function(req, res, next) {
@@ -50,7 +48,6 @@ router.put('/:id', function(req, res, next) {
             res.json(rows);
         }
     });
-    next();
 });
 
 module.exports = router;
