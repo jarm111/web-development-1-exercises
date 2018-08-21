@@ -27,7 +27,7 @@ router.get('/:id?', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-    Task.addTask(req.body, function(err, count) {
+    Task.addTask(req.body, function(err) {
         if (err) {
             res.json(err);
         } else {
