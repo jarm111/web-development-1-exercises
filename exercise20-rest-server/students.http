@@ -1,5 +1,8 @@
 ### Get all values
 GET http://localhost:3000/students/
 
-### Get defined value
+### Get value by id
 GET http://localhost:3000/students/1
+
+### Get values with under 100 credits
+GET http://localhost:3000/students/under100
