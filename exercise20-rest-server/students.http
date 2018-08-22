@@ -1,4 +1,4 @@
-@id = 4
+@id = 6
 
 ### Get all values
 GET http://localhost:3000/students/
@@ -9,7 +9,7 @@ GET http://localhost:3000/students/{{id}}
 ### Get values with under 100 credits
 GET http://localhost:3000/students/under100
 
-### Create new student
+### Create new student value
 POST http://localhost:3000/students/
 content-type: application/json
 
@@ -18,6 +18,17 @@ content-type: application/json
     "forename": "Veli", 
     "studentnumber": "r9191", 
     "credits": 12
+}
+
+### Update student value
+PUT http://localhost:3000/students/{{id}}
+content-type: application/json
+
+{
+    "surename": "Puolikuu", 
+    "forename": "Veli", 
+    "studentnumber": "r9191", 
+    "credits": 201
 }
 
 ### Delete value

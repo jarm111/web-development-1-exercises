@@ -19,6 +19,10 @@ var studentQueries = {
 
     deleteStudent: function(id, callback) {
         db.query('DELETE FROM opiskelijat WHERE id=?', [id], callback);
+    },
+
+    updateStudent: function(id, student, callback) {
+        db.query('UPDATE opiskelijat SET snimi=?, enimi=?, onumero=?, opisteet=? WHERE id=?', [student.surename, student.forename, student.studentnumber, student.credits, id], callback);
     }
 };
 
