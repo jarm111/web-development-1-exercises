@@ -15,6 +15,10 @@ var studentQueries = {
 
     addStudent: function(student, callback) {
         db.query('INSERT INTO opiskelijat (snimi, enimi, onumero, opisteet) VALUES(?, ?, ?, ?)', [student.surename, student.forename, student.studentnumber, student.credits], callback);
+    },
+
+    deleteStudent: function(id, callback) {
+        db.query('DELETE FROM opiskelijat WHERE id=?', [id], callback);
     }
 };
 
