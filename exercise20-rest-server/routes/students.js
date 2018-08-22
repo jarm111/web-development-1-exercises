@@ -32,4 +32,14 @@ router.get('/:id', function(req, res, next) {
     });
 });
 
+router.post('/', function(req, res, next) {
+    queries.addStudent(req.body, function(err) {
+        if (err) {
+            res.json(err);
+        } else {
+            res.json(req.body);
+        }
+    });
+});
+
 module.exports = router;

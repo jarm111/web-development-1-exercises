@@ -6,3 +6,14 @@ GET http://localhost:3000/students/1
 
 ### Get values with under 100 credits
 GET http://localhost:3000/students/under100
+
+### Create new student
+POST http://localhost:3000/students/
+content-type: application/json
+
+{
+    "surename": "Puolikuu", 
+    "forename": "Veli", 
+    "studentnumber": "r9191", 
+    "credits": 12
+}

@@ -11,6 +11,10 @@ var studentQueries = {
 
     getStudentsUnder100Credits: function(callback) {
         db.query('SELECT * FROM opiskelijat WHERE opisteet<100', callback);
+    },
+
+    addStudent: function(student, callback) {
+        db.query('INSERT INTO opiskelijat (snimi, enimi, onumero, opisteet) VALUES(?, ?, ?, ?)', [student.surename, student.forename, student.studentnumber, student.credits], callback);
     }
 };
 
