@@ -43,3 +43,7 @@ content-type: application/json
     "email": "matti@email.com", 
     "password": "masa123"
 }
+
+### Get if user has authentication
+GET http://localhost:3000/auth/me
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNTM1MDIzMTM4LCJleHAiOjE1MzUwMjM0Mzh9.jMbY720tIwf_L5sYhBeB7vE-nY5MylXey4QOWiqPs6w
