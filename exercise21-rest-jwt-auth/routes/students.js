@@ -4,10 +4,10 @@
 
 var express = require('express');
 var router = express.Router();
-var queries = require('../queries');
+var Student = require('../models/Student');
 
 router.get('/', function(req, res, next) {
-    queries.getAllStudents(function(err, rows) {
+    Student.getAllStudents(function(err, rows) {
         if (err) {
             res.json(err);
         } else {
@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/under100', function(req, res, next) {
-    queries.getStudentsUnder100Credits(function(err, rows) {
+    Student.getStudentsUnder100Credits(function(err, rows) {
         if (err) {
             res.json(err);
         } else {
@@ -27,7 +27,7 @@ router.get('/under100', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-    queries.getStudentById(req.params.id, function(err, rows) {
+    Student.getStudentById(req.params.id, function(err, rows) {
         if (err) {
             res.json(err);
         } else {
@@ -37,7 +37,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-    queries.addStudent(req.body, function(err) {
+    Student.addStudent(req.body, function(err) {
         if (err) {
             res.json(err);
         } else {
@@ -47,7 +47,7 @@ router.post('/', function(req, res, next) {
 });
 
 router.delete('/:id', function(req, res, next) {
-    queries.deleteStudent(req.params.id, function(err, count) {
+    Student.deleteStudent(req.params.id, function(err, count) {
         if (err) {
             res.json(err);
         } else {
@@ -57,7 +57,7 @@ router.delete('/:id', function(req, res, next) {
 });
 
 router.put('/:id', function(req, res, next) {
-    queries.updateStudent(req.params.id, req.body, function(err, rows) {
+    Student.updateStudent(req.params.id, req.body, function(err, rows) {
         if (err) {
             res.json(err);
         } else {

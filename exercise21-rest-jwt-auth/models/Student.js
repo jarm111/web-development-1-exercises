@@ -1,10 +1,10 @@
 /*
- * Application methods for database queries
+ * Student object offers methods for database queries
  */
 
-var db = require('./dbconnection');
+var db = require('../dbconnection');
 
-var studentQueries = {
+var Student = {
     getAllStudents: function(callback) {
         db.query('SELECT * FROM opiskelijat', callback);
     },
@@ -30,4 +30,4 @@ var studentQueries = {
     }
 };
 
-module.exports = studentQueries;
+module.exports = Student;
