@@ -12,16 +12,10 @@ INSERT INTO `opiskelijat` (`snimi`, `enimi`, `onumero`, `opisteet`) VALUES
 	('Nykänen', 'Matti', 'y9342', 90),
 	('Vallaton', 'Ville', 'j9494', 112);
 
-CREATE TABLE IF NOT EXISTS `user` (
-  `username` varchar(20) NOT NULL DEFAULT '',
-  `password` varchar(20) NOT NULL DEFAULT '',
-  `ID` int(11) NOT NULL AUTO_INCREMENT
+CREATE TABLE IF NOT EXISTS `user_jwt` (
+  `name` varchar(20) NOT NULL DEFAULT '',
+  `email` varchar(20) NOT NULL DEFAULT '',
+  `password` varchar(100) NOT NULL DEFAULT '',
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;
-
-INSERT INTO `user` (`username`, `password`) VALUES
-('kekkonen', 'oukei'),
-('oinenonen', 'itsonn123'),
-('hapannaama', 'ripari88'),
-('asdf', 'asdf123'),
-('seppo', 'sepiepiepi');

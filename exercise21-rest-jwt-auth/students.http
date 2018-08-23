@@ -33,3 +33,13 @@ content-type: application/json
 
 ### Delete value
 DELETE http://localhost:3000/students/{{id}}
+
+### Add new user
+POST http://localhost:3000/auth/register/
+content-type: application/json
+
+{
+    "name": "matti", 
+    "email": "matti@email.com", 
+    "password": "masa123"
+}
