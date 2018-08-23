@@ -7,6 +7,10 @@ var User = {
 
     getUserById: function(id, callback) {
         db.query('SELECT * FROM user_jwt WHERE id=?', [id], callback);
+    },
+
+    getUserByEmail: function(email, callback) {
+        db.query('SELECT * FROM user_jwt WHERE email=?', [email], callback);
     }
 };
 
