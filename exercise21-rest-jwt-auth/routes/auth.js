@@ -60,7 +60,7 @@ router.get('/me', function (req, res) {
 router.post('/login', function(req, res) {
     User.getUserByEmail(req.body.email, function(err, user) {
         if (err) return res.status(500).send('Error on the server');
-        if (!user) return res.status(404).send('No user found');
+        if (!user[0]) return res.status(404).send('No user found');
 
         var passwordIsValid = bcrypt.compareSync(req.body.password, user[0].password);
         if (!passwordIsValid) return res.status(401).send({auth: false, token: null});
@@ -71,6 +71,10 @@ router.post('/login', function(req, res) {
 
         res.status(200).send({auth: true, token: token});
     });
+});
+
+router.get('/logout', function(req, res) {
+    res.status(200).send({auth: false, token: null});
 });
 
 module.exports = router;
