@@ -16,6 +16,6 @@ CREATE TABLE IF NOT EXISTS `user_jwt` (
   `name` varchar(20) NOT NULL DEFAULT '',
   `email` varchar(20) NOT NULL DEFAULT '',
   `password` varchar(100) NOT NULL DEFAULT '',
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;

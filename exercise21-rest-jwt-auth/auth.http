@@ -10,7 +10,7 @@ content-type: application/json
 
 ### Get authenticated user's info
 GET http://localhost:3000/auth/me
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNTM1MDIzMTM4LCJleHAiOjE1MzUwMjM0Mzh9.jMbY720tIwf_L5sYhBeB7vE-nY5MylXey4QOWiqPs6w
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTM1MTAwMDgwLCJleHAiOjE1MzUxMDA2ODB9.pAii2RD5OOl8mAu0lT6PRKQMU4SXxHw3AtJ7IR6DvTE
 
 ### Login user
 POST http://localhost:3000/auth/login/
