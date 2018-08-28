@@ -2,7 +2,7 @@
  * Application methods for database queries
  */
 
-var db = require('../dbconnection');
+var db = require('./dbconnection');
 
 var studentQueries = {
     getAllStudents: function(callback) {
