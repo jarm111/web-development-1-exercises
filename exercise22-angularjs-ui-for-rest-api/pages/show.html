@@ -6,18 +6,18 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Nimi</th>
-                        <th>Email</th>
+                        <th>Opiskelijanumero</th>
+                        <th>Sukunimi</th>
+                        <th>Etunimi</th>
                         <th>Opintopisteet</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="x in students">
-                        <td>{{ x.student_number}}</td>
-                        <td>{{x.name}}</td>
-                        <td>{{ x.email}}</td>
-                        <td>{{ x.study_points}}</td>
+                        <td>{{x.onumero}}</td>
+                        <td>{{x.snimi}}</td>
+                        <td>{{x.enimi}}</td>
+                        <td>{{x.opisteet}}</td>
                     </tr>
                 </tbody>
             </table>

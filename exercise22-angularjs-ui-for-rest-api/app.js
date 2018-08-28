@@ -86,7 +86,6 @@ studentApp.factory('dataService', function ($http) {
 
 //etusivun controller
 studentApp.controller('showController', ['$scope', 'dataService', function ($scope, dataService) {
-
     //promisen käyttö
     dataService.read().then(function (data) {
         $scope.students = data;
