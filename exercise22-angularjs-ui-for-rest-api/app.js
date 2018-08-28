@@ -1,25 +1,23 @@
+/* globals angular */
+
 //moduli jossa mukana ngRoute reititystä varten
 var studentApp = angular.module('studentApp', ['ngRoute']);
 // configure our routes
-studentApp.run();//ajetaan aina käynnistyksessä run()
+studentApp.run(); //ajetaan aina käynnistyksessä run()
 
 studentApp.config(function ($routeProvider) {
     $routeProvider
-
         .when('/', {
             templateUrl: 'pages/show.html',
             controller: 'showController'
         })
-
         .when('/login', {
             templateUrl: 'pages/login.html',
             controller: 'loginController'
         })
-
         .when('/admin', {
             templateUrl: 'pages/admin.html',
             controller: 'adminController'
-
         });
 });
 
@@ -29,11 +27,9 @@ studentApp.config(function ($routeProvider) {
  * sivulle. Kun avaat kommentista tämän funktion, sovellus ei aluksi
  * toimi.
  */
-/*
-studentApp.run(function ($rootScope, $http, $location, $window, authService) {
-   //toteutus tänne
-});
-*/
+// studentApp.run(function ($rootScope, $http, $location, $window, authService) {
+//    //toteutus tänne
+// });
 
 /*
  * authService huolehtii sovelluksen autentikaatiosta
@@ -45,16 +41,11 @@ studentApp.run(function ($rootScope, $http, $location, $window, authService) {
  * $http:llä saadaan tavara serveriltä
  * $window:lla päästään käsiksi sessionstorageen
  */
-
-
 studentApp.factory('authService', function ($http, $window) {
     /*
     Toteutus tänne
     */
-
-
 });
-
 
 /*
  * Kaikki yhteydet backendiin ovat dataservicessä
@@ -63,10 +54,7 @@ studentApp.factory('authService', function ($http, $window) {
  *
  * factory palauttaa funktioita jotka palauttavat promisen
  */
-
 studentApp.factory('dataService', function ($http) {
-
-
     return {
         read: function () {
             //palautetaan promise
@@ -88,18 +76,13 @@ studentApp.factory('dataService', function ($http) {
             });
         },
         del: function (student) {
-
             //toteutus tänne
         },
         update: function (formdata) {
-
             //toteutus tänne
         }
     };
 });
-
-
-
 
 //etusivun controller
 studentApp.controller('showController', ['$scope', 'dataService', function ($scope, dataService) {
@@ -110,47 +93,33 @@ studentApp.controller('showController', ['$scope', 'dataService', function ($sco
     });
 }]);
 
-
-
 //login-sivun controller hakee tunnarit login-sivulta ja välittää ne authServiceen
 studentApp.controller('loginController', ['$scope', 'authService', function ($scope, authService) {
-
-
 
 }]);
 
 //admin-sivun controller
 studentApp.controller('adminController', ['$scope', 'dataService', function ($scope, dataService) {
-
     //Nappien alkutilanne
     $scope.createbtn = true;
     $scope.updatebtn = false;
 
     $scope.read = function () {
-
         dataService.read().then(function (data) {
             $scope.students = data;
         });
-
     };
 
     $scope.read();//luetaan uusin data aina ensin kun tullaan admin-tilaan
 
-
     $scope.create = function () {
-
         dataService.create($scope.formdata).then(function () {
-
             $scope.read();
         });
-
     };
 
-
     $scope.del = function (student) {
-
         //toteutus tänne
-
     };
 
     /*
@@ -161,7 +130,6 @@ studentApp.controller('adminController', ['$scope', 'dataService', function ($sc
      * datan joka laitetaan scopeen ja scope ladataan uudestaan
      */
     $scope.updateform = function (student) {
-
         $scope.formdata = {};//määritellään formdata -taulukko ja tyhjennetään jos on jo olemassa
 
         $scope.formdata._id = student._id;
@@ -172,15 +140,9 @@ studentApp.controller('adminController', ['$scope', 'dataService', function ($sc
 
         $scope.createbtn = false;
         $scope.updatebtn = true;
-
-
     };
 
     $scope.update = function () {
-
-
         //toteutus tänne
-
     };
-
 }]);
