@@ -2,15 +2,15 @@
 
 <div class="panel panel-default">
     <div class="panel-heading"><strong>Admin</strong></div>
-    
+
     <div class="panel-body">
-        
+
         <!--Tämä on tilanteesta riippuen muokkaus- tai lisäyslomake -->
         <form role="form">
             <div class="form-group">
                 <label for="nimi">#:</label>
                 <input type="text" class="form-control" id="student_number" placeholder="opiskelijanumero" ng-model="formdata.student_number">
-                
+
                 <label for="nimi">Nimi:</label>
                 <input type="text" class="form-control" id="name" placeholder="nimi" ng-model="formdata.name">
 
@@ -19,18 +19,18 @@
 
                 <label for="nimi">Opintopisteet:</label>
                 <input type="text" class="form-control" id="study_points" placeholder="opintopisteet" ng-model="formdata.study_points">
-                <input type="hidden" ng-model="formdata._id"/>
+                <input type="hidden" ng-model="formdata._id" />
             </div>
-            
+
             <button type="submit" class="btn btn-default" ng-show="createbtn" ng-click="create()">Luo uusi</button>
             <button type="submit" class="btn btn-default" ng-show="updatebtn" ng-click="update()">Muokkaa</button>
-            
+
         </form>
     </div>
-    
+
     <div class="panel-body">
 
-        <div class="table-responsive">          
+        <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -43,7 +43,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                     <tr ng-repeat="x in students">
+                    <tr ng-repeat="x in students">
                         <td>{{x.student_number}}</td>
                         <td>{{x.name}}</td>
                         <td>{{ x.email}}</td>
@@ -55,5 +55,5 @@
             </table>
         </div>
     </div>
-     
+
 </div>

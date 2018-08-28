@@ -6,21 +6,21 @@ studentApp.run();//ajetaan aina käynnistyksessä run()
 studentApp.config(function ($routeProvider) {
     $routeProvider
 
-            .when('/', {
-                templateUrl: 'pages/show.html',
-                controller: 'showController'
-            })
+        .when('/', {
+            templateUrl: 'pages/show.html',
+            controller: 'showController'
+        })
 
-            .when('/login', {
-                templateUrl: 'pages/login.html',
-                controller: 'loginController'
-            })
+        .when('/login', {
+            templateUrl: 'pages/login.html',
+            controller: 'loginController'
+        })
 
-            .when('/admin', {
-                templateUrl: 'pages/admin.html',
-                controller: 'adminController'
+        .when('/admin', {
+            templateUrl: 'pages/admin.html',
+            controller: 'adminController'
 
-            });
+        });
 });
 
 /* run-funktiossa tutkitaan $locationChangeStart -olion avulla
@@ -29,9 +29,9 @@ studentApp.config(function ($routeProvider) {
  * sivulle. Kun avaat kommentista tämän funktion, sovellus ei aluksi
  * toimi.
  */
- /*
- studentApp.run(function ($rootScope, $http, $location, $window, authService) {
-    //toteutus tänne
+/*
+studentApp.run(function ($rootScope, $http, $location, $window, authService) {
+   //toteutus tänne
 });
 */
 
@@ -71,14 +71,14 @@ studentApp.factory('dataService', function ($http) {
         read: function () {
             //palautetaan promise
             return $http.get('http://localhost:3000/students')
-                    .then(function (result) {
-                        return result.data;
-                    });
+                .then(function (result) {
+                    return result.data;
+                });
 
         },
         create: function (formdata) {
             //lähetetään data backendiin, palautetaan promise
-            return  $http({
+            return $http({
                 method: 'post',
                 url: 'http://localhost:3000/students',
                 data: formdata
@@ -89,11 +89,11 @@ studentApp.factory('dataService', function ($http) {
         },
         del: function (student) {
 
-			//toteutus tänne
+            //toteutus tänne
         },
         update: function (formdata) {
 
-		   //toteutus tänne
+            //toteutus tänne
         }
     };
 });
@@ -104,11 +104,11 @@ studentApp.factory('dataService', function ($http) {
 //etusivun controller
 studentApp.controller('showController', ['$scope', 'dataService', function ($scope, dataService) {
 
-        //promisen käyttö
-        dataService.read().then(function (data) {
-            $scope.students = data;
-        });
-    }]);
+    //promisen käyttö
+    dataService.read().then(function (data) {
+        $scope.students = data;
+    });
+}]);
 
 
 
@@ -117,70 +117,70 @@ studentApp.controller('loginController', ['$scope', 'authService', function ($sc
 
 
 
-    }]);
+}]);
 
 //admin-sivun controller
 studentApp.controller('adminController', ['$scope', 'dataService', function ($scope, dataService) {
 
-        //Nappien alkutilanne
-        $scope.createbtn = true;
-        $scope.updatebtn = false;
+    //Nappien alkutilanne
+    $scope.createbtn = true;
+    $scope.updatebtn = false;
 
-        $scope.read = function () {
+    $scope.read = function () {
 
-            dataService.read().then(function (data) {
-                $scope.students = data;
-            });
+        dataService.read().then(function (data) {
+            $scope.students = data;
+        });
 
-        };
+    };
 
-        $scope.read();//luetaan uusin data aina ensin kun tullaan admin-tilaan
-
-
-        $scope.create = function () {
-
-            dataService.create($scope.formdata).then(function () {
-
-                $scope.read();
-            });
-
-        };
+    $scope.read();//luetaan uusin data aina ensin kun tullaan admin-tilaan
 
 
-        $scope.del = function (student) {
+    $scope.create = function () {
 
-           //toteutus tänne
+        dataService.create($scope.formdata).then(function () {
 
-        };
+            $scope.read();
+        });
 
-        /*
-         * updateform -napin painaminen laittaa muokattavat tiedot scopeen
-         * jolloin ne näkyvät viewissä muokkauslomakkeella.
-         * Tässä siis ladataan data muokkauslomakkeelle
-         * update-funktio vie datan kantaan ja hakee kannasta päivittyneen
-         * datan joka laitetaan scopeen ja scope ladataan uudestaan
-         */
-        $scope.updateform = function (student) {
-
-            $scope.formdata = {};//määritellään formdata -taulukko ja tyhjennetään jos on jo olemassa
-
-            $scope.formdata._id = student._id;
-            $scope.formdata.student_number = student.student_number;
-            $scope.formdata.name = student.name;
-            $scope.formdata.email = student.email;
-            $scope.formdata.study_points = student.study_points;
-
-            $scope.createbtn = false;
-            $scope.updatebtn = true;
+    };
 
 
-        };
+    $scope.del = function (student) {
 
-        $scope.update = function () {
+        //toteutus tänne
+
+    };
+
+    /*
+     * updateform -napin painaminen laittaa muokattavat tiedot scopeen
+     * jolloin ne näkyvät viewissä muokkauslomakkeella.
+     * Tässä siis ladataan data muokkauslomakkeelle
+     * update-funktio vie datan kantaan ja hakee kannasta päivittyneen
+     * datan joka laitetaan scopeen ja scope ladataan uudestaan
+     */
+    $scope.updateform = function (student) {
+
+        $scope.formdata = {};//määritellään formdata -taulukko ja tyhjennetään jos on jo olemassa
+
+        $scope.formdata._id = student._id;
+        $scope.formdata.student_number = student.student_number;
+        $scope.formdata.name = student.name;
+        $scope.formdata.email = student.email;
+        $scope.formdata.study_points = student.study_points;
+
+        $scope.createbtn = false;
+        $scope.updatebtn = true;
 
 
-            //toteutus tänne
+    };
 
-        };
+    $scope.update = function () {
 
-    }]);
+
+        //toteutus tänne
+
+    };
+
+}]);
