@@ -12,6 +12,7 @@ var User = require('../models/User');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 var config = require('../config');
+var VerifyToken = require('../middleware/VerifyToken');
 var tokenExpireTime = 600; // 10 minutes
 
 // Register new user
@@ -42,29 +43,14 @@ router.post('/register', function (req, res) {
 
 // Get logged in user info
 // expect the token be sent along with the request in the headers
-router.get('/me', function (req, res) {
-    // The default name for a token in the headers of an HTTP request is x-access-token
-    var token = req.headers['x-access-token'];
-
-    if (!token) {
-        return res.status(401).send({ auth: false, message: 'No token provided' });
-    }
-
-    // decodes the token making it possible to view the original payload
-    jwt.verify(token, config.secret, function (err, decoded) {
-        if (err) {
-            return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
-        }
-
-        // res.status(200).send(decoded);
-        User.getUserById(decoded.id, function (err, user) {
-            if (err) return res.status(500).send('There was a problem finding the user');
-            if (!user) return res.status(404).send('No user found');
-            // don't show password
-            user[0].password = 0;
-            // send back the user object
-            res.status(200).send(user);
-        });
+router.get('/me', VerifyToken, function (req, res) {
+    User.getUserById(req.userId, function (err, user) {
+        if (err) return res.status(500).send('There was a problem finding the user');
+        if (!user[0]) return res.status(404).send('No user found');
+        // don't show password
+        user[0].password = 0;
+        // send back the user object
+        res.status(200).send(user);
     });
 });
 
@@ -79,7 +65,7 @@ router.post('/login', function(req, res) {
         if (!passwordIsValid) return res.status(401).send({auth: false, token: null});
 
         // sign a token
-        var token = jwt.sign({id: user.insertId}, config.secret, {
+        var token = jwt.sign({id: user[0].id}, config.secret, {
             expiresIn: tokenExpireTime
         });
 

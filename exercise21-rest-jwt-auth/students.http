@@ -1,4 +1,5 @@
 @id = 6
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNTM1MzUzNTg4LCJleHAiOjE1MzUzNTQxODh9.IoqJ13GgBC9OdYMsNkIO8GDXg2J8JNwY6RXwP0FQt7Y
 
 ### Get all values
 GET http://localhost:3000/students/
@@ -12,6 +13,7 @@ GET http://localhost:3000/students/under100
 ### Create new student value
 POST http://localhost:3000/students/
 content-type: application/json
+x-access-token: {{token}}
 
 {
     "surename": "Puolikuu", 
@@ -23,6 +25,7 @@ content-type: application/json
 ### Update student value
 PUT http://localhost:3000/students/{{id}}
 content-type: application/json
+x-access-token: {{token}}
 
 {
     "surename": "Puolikuu", 
@@ -33,3 +36,4 @@ content-type: application/json
 
 ### Delete value
 DELETE http://localhost:3000/students/{{id}}
+x-access-token: {{token}}

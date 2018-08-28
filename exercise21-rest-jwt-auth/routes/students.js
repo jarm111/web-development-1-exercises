@@ -5,6 +5,7 @@
 var express = require('express');
 var router = express.Router();
 var Student = require('../models/Student');
+var VerifyToken = require('../middleware/VerifyToken');
 
 router.get('/', function(req, res, next) {
     Student.getAllStudents(function(err, rows) {
@@ -36,7 +37,7 @@ router.get('/:id', function(req, res, next) {
     });
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', VerifyToken, function(req, res, next) {
     Student.addStudent(req.body, function(err) {
         if (err) {
             res.json(err);
@@ -46,7 +47,7 @@ router.post('/', function(req, res, next) {
     });
 });
 
-router.delete('/:id', function(req, res, next) {
+router.delete('/:id', VerifyToken, function(req, res, next) {
     Student.deleteStudent(req.params.id, function(err, count) {
         if (err) {
             res.json(err);
@@ -56,7 +57,7 @@ router.delete('/:id', function(req, res, next) {
     });
 });
 
-router.put('/:id', function(req, res, next) {
+router.put('/:id', VerifyToken, function(req, res, next) {
     Student.updateStudent(req.params.id, req.body, function(err, rows) {
         if (err) {
             res.json(err);

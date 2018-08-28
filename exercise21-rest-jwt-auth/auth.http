@@ -1,3 +1,6 @@
+x-access-token: {{token}}
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNTM1MzUyNzkzLCJleHAiOjE1MzUzNTMzOTN9.8Yrh8d6YXnFc_IShHkRaf25_h6v0kHdi3RwT9giMbwE
+
 ### Add new user
 POST http://localhost:3000/auth/register/
 content-type: application/json
@@ -10,7 +13,7 @@ content-type: application/json
 
 ### Get authenticated user's info
 GET http://localhost:3000/auth/me
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNTM1MDIzMTM4LCJleHAiOjE1MzUwMjM0Mzh9.jMbY720tIwf_L5sYhBeB7vE-nY5MylXey4QOWiqPs6w
+x-access-token: {{token}}
 
 ### Login user
 POST http://localhost:3000/auth/login/
