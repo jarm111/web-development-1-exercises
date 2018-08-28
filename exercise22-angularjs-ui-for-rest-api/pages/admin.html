@@ -37,10 +37,10 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="x in students">
-                        <td>{{x.student_number}}</td>
-                        <td>{{x.name}}</td>
-                        <td>{{ x.email}}</td>
-                        <td>{{ x.study_points}}</td>
+                        <td>{{x.onumero}}</td>
+                        <td>{{x.snimi}}</td>
+                        <td>{{x.enimi}}</td>
+                        <td>{{x.opisteet}}</td>
                         <td><span id="del" class="btn btn-link" ng-click="del(x)">Poista</span></td>
                         <td><span id="updform" class="btn btn-link" ng-click="updateform(x)">Muokkaa</span></td>
                     </tr>
