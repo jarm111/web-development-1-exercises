@@ -5,14 +5,14 @@
         <!--Tämä on tilanteesta riippuen muokkaus- tai lisäyslomake -->
         <form role="form">
             <div class="form-group">
-                <label for="nimi">#:</label>
+                <label for="nimi">Opiskelijanumero:</label>
                 <input type="text" class="form-control" id="student_number" placeholder="opiskelijanumero" ng-model="formdata.student_number">
 
-                <label for="nimi">Nimi:</label>
-                <input type="text" class="form-control" id="name" placeholder="nimi" ng-model="formdata.name">
+                <label for="nimi">Sukunimi:</label>
+                <input type="text" class="form-control" id="last_name" placeholder="sukunimi" ng-model="formdata.last_name">
 
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" placeholder="email" ng-model="formdata.email">
+                <label for="email">Etunimi:</label>
+                <input type="email" class="form-control" id="first_name" placeholder="etunimi" ng-model="formdata.first_name">
 
                 <label for="nimi">Opintopisteet:</label>
                 <input type="text" class="form-control" id="study_points" placeholder="opintopisteet" ng-model="formdata.study_points">
@@ -27,9 +27,9 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Nimi</th>
-                        <th>Email</th>
+                        <th>Opiskelijanumero</th>
+                        <th>Sukunimi</th>
+                        <th>Etunimi</th>
                         <th>Opintopisteet</th>
                         <th></th>
                         <th></th>
