@@ -64,6 +64,14 @@ studentApp.factory('dataService', function ($http) {
                 });
 
         },
+        readUnder100: function () {
+            //palautetaan promise
+            return $http.get('http://localhost:3000/students/under100')
+                .then(function (result) {
+                    return result.data;
+                });
+
+        },
         create: function (formdata) {
             //lähetetään data backendiin, palautetaan promise
             return $http({
@@ -86,10 +94,26 @@ studentApp.factory('dataService', function ($http) {
 
 //etusivun controller
 studentApp.controller('showController', ['$scope', 'dataService', function ($scope, dataService) {
-    //promisen käyttö
-    dataService.read().then(function (data) {
-        $scope.students = data;
-    });
+    $scope.showUnder100credits = false;
+    updateStudentData();
+
+    $scope.toggleUnder100credits = function() {
+        $scope.showUnder100credits = $scope.showUnder100credits ? false : true;
+        updateStudentData();
+    };
+
+    function updateStudentData() {
+        if ($scope.showUnder100credits) {
+            dataService.readUnder100().then(function(data) {
+                $scope.students = data;
+            });
+        } else {
+            //promisen käyttö
+            dataService.read().then(function(data) {
+                $scope.students = data;
+            });
+        }
+    }
 }]);
 
 //login-sivun controller hakee tunnarit login-sivulta ja välittää ne authServiceen
