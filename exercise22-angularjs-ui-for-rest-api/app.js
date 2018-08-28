@@ -126,6 +126,10 @@ studentApp.controller('adminController', ['$scope', 'dataService', function ($sc
     //Nappien alkutilanne
     $scope.createbtn = true;
     $scope.updatebtn = false;
+    $scope.studentNumberRegex = /^[a-z]{1}[0-9]{4}$/;
+    $scope.studyPointsRegex = /^[0-9]{1,4}$/;
+    $scope.required = true;
+    $scope.nameMaxLength = 30;
 
     $scope.read = function () {
         dataService.read().then(function (data) {
