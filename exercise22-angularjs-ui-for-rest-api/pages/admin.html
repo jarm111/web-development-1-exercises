@@ -25,12 +25,12 @@
                 <span class="help-block" ng-show="form.credits.$error.pattern">Syötä kokonaisluku väliltä 0-9999</span>
                 <span class="help-block" ng-show="form.credits.$error.required">Vaaditaan!</span>
                 
-                <input type="hidden" ng-model="formdata._id" />
+                <input type="hidden" ng-model="formdata.id" />
             </div>
             <button type="submit" class="btn btn-default" ng-show="createbtn" ng-click="create()" ng-disabled="form.$invalid">Luo uusi</button>
             <button type="submit" class="btn btn-default" ng-show="updatebtn" ng-click="update()" ng-disabled="form.$invalid">Muokkaa</button>
         </form>
-        <code>{{formdata}}</code><br>
+        Formdata: <code>{{formdata}}</code><br>
     </div>
     <div class="panel-body">
         <div class="table-responsive">

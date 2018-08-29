@@ -78,9 +78,8 @@ studentApp.factory('dataService', function ($http) {
                 method: 'post',
                 url: 'http://localhost:3000/students',
                 data: formdata
-            }).then(function (result) {
+            }).then(function(result) {
                 return result.data;
-
             });
         },
         del: function (id) {
@@ -90,7 +89,13 @@ studentApp.factory('dataService', function ($http) {
             });
         },
         update: function (formdata) {
-            //toteutus tänne
+            return $http({
+                method: 'put',
+                url: 'http://localhost:3000/students/' + formdata.id,
+                data: formdata
+            }).then(function(result) {
+                return result.data;
+            });
         }
     };
 });
@@ -164,17 +169,19 @@ studentApp.controller('adminController', ['$scope', 'dataService', function ($sc
     $scope.updateform = function (student) {
         $scope.formdata = {};//määritellään formdata -taulukko ja tyhjennetään jos on jo olemassa
 
-        $scope.formdata._id = student._id;
-        $scope.formdata.student_number = student.student_number;
-        $scope.formdata.name = student.name;
-        $scope.formdata.email = student.email;
-        $scope.formdata.study_points = student.study_points;
+        $scope.formdata.id = student.id;
+        $scope.formdata.studentnumber = student.onumero;
+        $scope.formdata.surname = student.snimi;
+        $scope.formdata.forename = student.enimi;
+        $scope.formdata.credits = student.opisteet;
 
         $scope.createbtn = false;
         $scope.updatebtn = true;
     };
 
     $scope.update = function () {
-        //toteutus tänne
+        dataService.update($scope.formdata).then(function() {
+            $scope.read();
+        });
     };
 }]);
