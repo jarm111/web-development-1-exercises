@@ -4,11 +4,11 @@
     <div class="panel-body">
         <form role="form">
             <div class="form-group">
-                <label>Tunnus:</label>
-                <input type="text" class="form-control" placeholder="Tunnus" ng-model="username">
+                <label>Sähköposti:</label>
+                <input type="email" class="form-control" placeholder="Sähköposti" ng-model="login.email">
 
                 <label>Salasana:</label>
-                <input type="email" class="form-control" placeholder="Salasana" ng-model="password">
+                <input type="text" class="form-control" placeholder="Salasana" ng-model="login.password">
             </div>
             <button type="submit" class="btn btn-default" ng-click="login()">Kirjaudu</button>
         </form>

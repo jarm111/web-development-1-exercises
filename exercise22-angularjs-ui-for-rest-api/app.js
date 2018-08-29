@@ -5,7 +5,7 @@ var studentApp = angular.module('studentApp', ['ngRoute']);
 // configure our routes
 studentApp.run(); //ajetaan aina käynnistyksessä run()
 
-studentApp.config(function ($routeProvider) {
+studentApp.config(function($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'pages/show.html',
@@ -27,7 +27,7 @@ studentApp.config(function ($routeProvider) {
  * sivulle. Kun avaat kommentista tämän funktion, sovellus ei aluksi
  * toimi.
  */
-// studentApp.run(function ($rootScope, $http, $location, $window, authService) {
+// studentApp.run(function($rootScope, $http, $location, $window, authService) {
 //    //toteutus tänne
 // });
 
@@ -41,10 +41,38 @@ studentApp.config(function ($routeProvider) {
  * $http:llä saadaan tavara serveriltä
  * $window:lla päästään käsiksi sessionstorageen
  */
-studentApp.factory('authService', function ($http, $window) {
-    /*
-    Toteutus tänne
-    */
+studentApp.factory('authService', function($http, $window) {
+    return {
+        login: function(email, password, callback) {
+            $http.post(
+                'http://localhost:3000/auth/login/',
+                {
+                    email: email,
+                    password: password
+                }
+            ).success(function(response) {
+                if (response.token) {
+                    // store username and token in session storage to keep user logged as long as browser tab is open
+                    $window.sessionStorage.setItem('currentUser', {email: email, token: response.token});
+
+                    // add jwt token to auth header for all requests made by the $http service
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + response.token;
+
+                    // execute callback with true to indicate successful login
+                    callback(true);
+                } else {
+                    // execute callback with false to indicate failed login
+                    callback(false);
+                }
+            });
+        },
+
+        logout: function() {
+            // remove user from session storage and clear http auth header
+            sessionStorage.removeItem('currentUser');
+            $http.defaults.headers.common.Authorization = '';    
+        }
+    };
 });
 
 /*
@@ -54,25 +82,23 @@ studentApp.factory('authService', function ($http, $window) {
  *
  * factory palauttaa funktioita jotka palauttavat promisen
  */
-studentApp.factory('dataService', function ($http) {
+studentApp.factory('dataService', function($http) {
     return {
-        read: function () {
+        read: function() {
             //palautetaan promise
             return $http.get('http://localhost:3000/students')
-                .then(function (result) {
+                .then(function(result) {
                     return result.data;
                 });
-
         },
-        readUnder100: function () {
+        readUnder100: function() {
             //palautetaan promise
             return $http.get('http://localhost:3000/students/under100')
-                .then(function (result) {
+                .then(function(result) {
                     return result.data;
                 });
-
         },
-        create: function (formdata) {
+        create: function(formdata) {
             //lähetetään data backendiin, palautetaan promise
             return $http({
                 method: 'post',
@@ -82,13 +108,13 @@ studentApp.factory('dataService', function ($http) {
                 return result.data;
             });
         },
-        del: function (id) {
+        del: function(id) {
             return $http({
                 method: 'delete',
                 url: 'http://localhost:3000/students/' + id,
             });
         },
-        update: function (formdata) {
+        update: function(formdata) {
             return $http({
                 method: 'put',
                 url: 'http://localhost:3000/students/' + formdata.id,
@@ -101,7 +127,7 @@ studentApp.factory('dataService', function ($http) {
 });
 
 //etusivun controller
-studentApp.controller('showController', ['$scope', 'dataService', function ($scope, dataService) {
+studentApp.controller('showController', ['$scope', 'dataService', function($scope, dataService) {
     $scope.showUnder100credits = false;
     updateStudentData();
 
@@ -125,12 +151,20 @@ studentApp.controller('showController', ['$scope', 'dataService', function ($sco
 }]);
 
 //login-sivun controller hakee tunnarit login-sivulta ja välittää ne authServiceen
-studentApp.controller('loginController', ['$scope', 'authService', function ($scope, authService) {
-
+studentApp.controller('loginController', ['$scope', 'authService', function($scope, authService) {
+    $scope.login = function() {
+        authService.login($scope.login.email, $scope.login.password, function(result) {
+            if (result === true) {
+                console.log('Login successful!');
+            } else {
+                console.log('Login failed!');
+            }
+        });
+    };
 }]);
 
 //admin-sivun controller
-studentApp.controller('adminController', ['$scope', 'dataService', function ($scope, dataService) {
+studentApp.controller('adminController', ['$scope', 'dataService', function($scope, dataService) {
     //Nappien alkutilanne
     $scope.createbtn = true;
     $scope.updatebtn = false;
@@ -139,21 +173,21 @@ studentApp.controller('adminController', ['$scope', 'dataService', function ($sc
     $scope.required = true;
     $scope.nameMaxLength = 30;
 
-    $scope.read = function () {
-        dataService.read().then(function (data) {
+    $scope.read = function() {
+        dataService.read().then(function(data) {
             $scope.students = data;
         });
     };
 
     $scope.read();//luetaan uusin data aina ensin kun tullaan admin-tilaan
 
-    $scope.create = function () {
-        dataService.create($scope.formdata).then(function () {
+    $scope.create = function() {
+        dataService.create($scope.formdata).then(function() {
             $scope.read();
         });
     };
 
-    $scope.del = function (student) {
+    $scope.del = function(student) {
         dataService.del(student.id).then(function() {
             $scope.read();
         });
@@ -166,7 +200,7 @@ studentApp.controller('adminController', ['$scope', 'dataService', function ($sc
      * update-funktio vie datan kantaan ja hakee kannasta päivittyneen
      * datan joka laitetaan scopeen ja scope ladataan uudestaan
      */
-    $scope.updateform = function (student) {
+    $scope.updateform = function(student) {
         $scope.formdata = {};//määritellään formdata -taulukko ja tyhjennetään jos on jo olemassa
 
         $scope.formdata.id = student.id;
@@ -179,7 +213,7 @@ studentApp.controller('adminController', ['$scope', 'dataService', function ($sc
         $scope.updatebtn = true;
     };
 
-    $scope.update = function () {
+    $scope.update = function() {
         dataService.update($scope.formdata).then(function() {
             $scope.read();
         });
