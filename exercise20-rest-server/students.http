@@ -14,7 +14,7 @@ POST http://localhost:3000/students/
 content-type: application/json
 
 {
-    "surename": "Puolikuu", 
+    "surname": "Puolikuu", 
     "forename": "Veli", 
     "studentnumber": "r9191", 
     "credits": 12
@@ -25,7 +25,7 @@ PUT http://localhost:3000/students/{{id}}
 content-type: application/json
 
 {
-    "surename": "Puolikuu", 
+    "surname": "Puolikuu", 
     "forename": "Veli", 
     "studentnumber": "r9191", 
     "credits": 201

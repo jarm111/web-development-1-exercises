@@ -18,7 +18,7 @@ var studentQueries = {
     },
 
     addStudent: function(student, callback) {
-        db.query('INSERT INTO opiskelijat (snimi, enimi, onumero, opisteet) VALUES(?, ?, ?, ?)', [student.surename, student.forename, student.studentnumber, student.credits], callback);
+        db.query('INSERT INTO opiskelijat (snimi, enimi, onumero, opisteet) VALUES(?, ?, ?, ?)', [student.surname, student.forename, student.studentnumber, student.credits], callback);
     },
 
     deleteStudent: function(id, callback) {
@@ -26,7 +26,7 @@ var studentQueries = {
     },
 
     updateStudent: function(id, student, callback) {
-        db.query('UPDATE opiskelijat SET snimi=?, enimi=?, onumero=?, opisteet=? WHERE id=?', [student.surename, student.forename, student.studentnumber, student.credits, id], callback);
+        db.query('UPDATE opiskelijat SET snimi=?, enimi=?, onumero=?, opisteet=? WHERE id=?', [student.surname, student.forename, student.studentnumber, student.credits, id], callback);
     }
 };
 

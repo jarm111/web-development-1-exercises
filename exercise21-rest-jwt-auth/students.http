@@ -16,7 +16,7 @@ content-type: application/json
 x-access-token: {{token}}
 
 {
-    "surename": "Puolikuu", 
+    "surname": "Puolikuu", 
     "forename": "Veli", 
     "studentnumber": "r9191", 
     "credits": 12
@@ -28,7 +28,7 @@ content-type: application/json
 x-access-token: {{token}}
 
 {
-    "surename": "Puolikuu", 
+    "surname": "Puolikuu", 
     "forename": "Veli", 
     "studentnumber": "r9191", 
     "credits": 201
