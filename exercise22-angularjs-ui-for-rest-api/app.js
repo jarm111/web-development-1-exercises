@@ -27,9 +27,23 @@ studentApp.config(function($routeProvider) {
  * sivulle. Kun avaat kommentista tämän funktion, sovellus ei aluksi
  * toimi.
  */
-// studentApp.run(function($rootScope, $http, $location, $window, authService) {
-//    //toteutus tänne
-// });
+studentApp.run(function($rootScope, $http, $location, $window, authService) {
+    var currentUser = JSON.parse($window.sessionStorage.getItem('currentUser'));
+    console.log(currentUser);
+    // keep user logged in after page refresh
+    if (currentUser) {
+        console.log(currentUser.token);
+        $http.defaults.headers.common.Authorization = 'Bearer ' + currentUser.token;
+    }
+    // redirect to login page if not logged in and trying to access a restricted page
+    $rootScope.$on('$locationChangeStart', function (event, next, current) {
+        var publicPages = ['/', '/login'];
+        var restrictedPage = publicPages.indexOf($location.path()) === -1;
+        if (restrictedPage && !currentUser) {
+            $location.path('/login');
+        }
+    });
+});
 
 /*
  * authService huolehtii sovelluksen autentikaatiosta
@@ -50,14 +64,13 @@ studentApp.factory('authService', function($http, $window) {
                     email: email,
                     password: password
                 }
-
             ).then(function successCallback(response) {
-                if (response.data.token) {
+                var token = response.data.token;
+                if (token) {
                     // store username and token in session storage to keep user logged as long as browser tab is open
-                    $window.sessionStorage.setItem('currentUser', {email: email, token: response.token});
-
+                    $window.sessionStorage.setItem('currentUser', JSON.stringify({email: email, token: token}));
                     // add jwt token to auth header for all requests made by the $http service
-                    $http.defaults.headers.common.Authorization = 'Bearer ' + response.token;
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + token;
 
                     // execute callback with true to indicate successful login
                     callback(response.status);
