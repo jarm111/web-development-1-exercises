@@ -83,8 +83,11 @@ studentApp.factory('dataService', function ($http) {
 
             });
         },
-        del: function (student) {
-            //toteutus tänne
+        del: function (id) {
+            return $http({
+                method: 'delete',
+                url: 'http://localhost:3000/students/' + id,
+            });
         },
         update: function (formdata) {
             //toteutus tänne
@@ -146,7 +149,9 @@ studentApp.controller('adminController', ['$scope', 'dataService', function ($sc
     };
 
     $scope.del = function (student) {
-        //toteutus tänne
+        dataService.del(student.id).then(function() {
+            $scope.read();
+        });
     };
 
     /*
