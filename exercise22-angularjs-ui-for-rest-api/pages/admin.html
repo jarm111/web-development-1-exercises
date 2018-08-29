@@ -5,31 +5,32 @@
         <!--Tämä on tilanteesta riippuen muokkaus- tai lisäyslomake -->
         <form role="form" name="form" novalidate>
             <div class="form-group">
-                <label for="student_number">Opiskelijanumero:</label>
-                <input type="text" class="form-control" id="student_number" name="student_number" placeholder="opiskelijanumero" ng-model="formdata.student_number" ng-pattern="studentNumberRegex" ng-required="required">
-                <span class="help-block" ng-show="form.student_number.$error.pattern">Opiskelijanumero muotoa: pieni kirjain + 4 numeroa</span>
-                <span class="help-block" ng-show="form.student_number.$error.required">Vaaditaan!</span>
+                <label for="studentnumber">Opiskelijanumero:</label>
+                <input type="text" class="form-control" id="studentnumber" name="studentnumber" placeholder="opiskelijanumero" ng-model="formdata.studentnumber" ng-pattern="studentNumberRegex" ng-required="required">
+                <span class="help-block" ng-show="form.studentnumber.$error.pattern">Opiskelijanumero muotoa: pieni kirjain + 4 numeroa</span>
+                <span class="help-block" ng-show="form.studentnumber.$error.required">Vaaditaan!</span>
 
-                <label for="last_name">Sukunimi:</label>
-                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="sukunimi" ng-model="formdata.last_name" ng-required="required" ng-maxlength="nameMaxLength">
-                <span class="help-block" ng-show="form.last_name.$error.required">Vaaditaan!</span>
-                <span class="help-block" ng-show="form.last_name.$error.maxlength">Max pituus {{nameMaxLength}} merkkiä</span>
+                <label for="surname">Sukunimi:</label>
+                <input type="text" class="form-control" id="surname" name="surname" placeholder="sukunimi" ng-model="formdata.surname" ng-required="required" ng-maxlength="nameMaxLength">
+                <span class="help-block" ng-show="form.surname.$error.required">Vaaditaan!</span>
+                <span class="help-block" ng-show="form.surname.$error.maxlength">Max pituus {{nameMaxLength}} merkkiä</span>
 
-                <label for="first_name">Etunimi:</label>
-                <input type="text" class="form-control" id="first_name" name="first_name" placeholder="etunimi" ng-model="formdata.first_name" ng-required="required" ng-maxlength="nameMaxLength">
-                <span class="help-block" ng-show="form.first_name.$error.required">Vaaditaan!</span>
-                <span class="help-block" ng-show="form.first_name.$error.maxlength">Max pituus {{nameMaxLength}} merkkiä</span>
+                <label for="forename">Etunimi:</label>
+                <input type="text" class="form-control" id="forename" name="forename" placeholder="etunimi" ng-model="formdata.forename" ng-required="required" ng-maxlength="nameMaxLength">
+                <span class="help-block" ng-show="form.forename.$error.required">Vaaditaan!</span>
+                <span class="help-block" ng-show="form.forename.$error.maxlength">Max pituus {{nameMaxLength}} merkkiä</span>
 
-                <label for="study_points">Opintopisteet:</label>
-                <input type="text" class="form-control" id="study_points" name="study_points" placeholder="opintopisteet" ng-model="formdata.study_points" ng-pattern="studyPointsRegex" ng-required="required">
-                <span class="help-block" ng-show="form.study_points.$error.pattern">Syötä kokonaisluku väliltä 0-9999</span>
-                <span class="help-block" ng-show="form.study_points.$error.required">Vaaditaan!</span>
+                <label for="credits">Opintopisteet:</label>
+                <input type="text" class="form-control" id="credits" name="credits" placeholder="opintopisteet" ng-model="formdata.credits" ng-pattern="studyPointsRegex" ng-required="required">
+                <span class="help-block" ng-show="form.credits.$error.pattern">Syötä kokonaisluku väliltä 0-9999</span>
+                <span class="help-block" ng-show="form.credits.$error.required">Vaaditaan!</span>
                 
                 <input type="hidden" ng-model="formdata._id" />
             </div>
             <button type="submit" class="btn btn-default" ng-show="createbtn" ng-click="create()" ng-disabled="form.$invalid">Luo uusi</button>
             <button type="submit" class="btn btn-default" ng-show="updatebtn" ng-click="update()" ng-disabled="form.$invalid">Muokkaa</button>
         </form>
+        <code>{{formdata}}</code><br>
     </div>
     <div class="panel-body">
         <div class="table-responsive">
