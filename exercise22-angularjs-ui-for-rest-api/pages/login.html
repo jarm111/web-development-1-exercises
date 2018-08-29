@@ -2,15 +2,17 @@
 <div class="panel panel-default">
     <div class="panel-heading"><strong>Login</strong></div>
     <div class="panel-body">
-        <form role="form">
+        <form role="form" name=loginform novalidate>
             <div class="form-group">
                 <label>Sähköposti:</label>
-                <input type="email" class="form-control" placeholder="Sähköposti" ng-model="login.email">
+                <input type="email" class="form-control" placeholder="Sähköposti" ng-model="loginData.email">
 
                 <label>Salasana:</label>
-                <input type="text" class="form-control" placeholder="Salasana" ng-model="login.password">
+                <input type="text" class="form-control" placeholder="Salasana" ng-model="loginData.password">
             </div>
             <button type="submit" class="btn btn-default" ng-click="login()">Kirjaudu</button>
+            <span class="help-block">{{loginData.message}}</span>
+            <!-- Formdata: <code>{{loginData}}</code><br> -->
         </form>
     </div>
 </div>

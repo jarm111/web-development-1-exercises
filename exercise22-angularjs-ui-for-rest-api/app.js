@@ -50,8 +50,9 @@ studentApp.factory('authService', function($http, $window) {
                     email: email,
                     password: password
                 }
-            ).success(function(response) {
-                if (response.token) {
+
+            ).then(function successCallback(response) {
+                if (response.data.token) {
                     // store username and token in session storage to keep user logged as long as browser tab is open
                     $window.sessionStorage.setItem('currentUser', {email: email, token: response.token});
 
@@ -59,11 +60,12 @@ studentApp.factory('authService', function($http, $window) {
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.token;
 
                     // execute callback with true to indicate successful login
-                    callback(true);
+                    callback(response.status);
                 } else {
-                    // execute callback with false to indicate failed login
-                    callback(false);
+                    callback(499);
                 }
+            }, function errorCallback(response) {
+                callback(response.status);
             });
         },
 
@@ -152,12 +154,21 @@ studentApp.controller('showController', ['$scope', 'dataService', function($scop
 
 //login-sivun controller hakee tunnarit login-sivulta ja välittää ne authServiceen
 studentApp.controller('loginController', ['$scope', 'authService', function($scope, authService) {
+    $scope.loginData = {};
+    $scope.loginData.message = '';
+
     $scope.login = function() {
-        authService.login($scope.login.email, $scope.login.password, function(result) {
-            if (result === true) {
-                console.log('Login successful!');
+        authService.login($scope.loginData.email, $scope.loginData.password, function(result) {
+            if (result === 200) {
+                $scope.loginData.message = 'Login successful!';
+            } else if (result === 404) {
+                $scope.loginData.message = 'User with provided email not found!';
+            } else if (result === 401) {
+                $scope.loginData.message = 'Wrong Password!';
+            } else if (result === 499) {
+                $scope.loginData.message = 'No token found!';
             } else {
-                console.log('Login failed!');
+                $scope.loginData.message = 'Unknown error: ' + result;
             }
         });
     };
