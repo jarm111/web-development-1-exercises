@@ -5,12 +5,14 @@
         <form role="form" name=loginform novalidate>
             <div class="form-group">
                 <label>Sähköposti:</label>
-                <input type="email" class="form-control" placeholder="Sähköposti" ng-model="loginData.email">
+                <input type="email" class="form-control" name="email" placeholder="Sähköposti" ng-model="loginData.email" ng-required="true">
+                <span class="help-block" ng-show="loginform.email.$error.required">Vaaditaan!</span>
 
                 <label>Salasana:</label>
-                <input type="text" class="form-control" placeholder="Salasana" ng-model="loginData.password">
+                <input type="text" class="form-control" name="password" placeholder="Salasana" ng-model="loginData.password" ng-required="true">
+                <span class="help-block" ng-show="loginform.password.$error.required">Vaaditaan!</span>
             </div>
-            <button type="submit" class="btn btn-default" ng-click="login()">Kirjaudu</button>
+            <button type="submit" class="btn btn-default" ng-click="login()" ng-disabled="loginform.$invalid">Kirjaudu</button>
             <span class="help-block">{{loginData.message}}</span>
             <!-- Formdata: <code>{{loginData}}</code><br> -->
         </form>
