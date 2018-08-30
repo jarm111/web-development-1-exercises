@@ -28,18 +28,21 @@ studentApp.config(function($routeProvider) {
  * toimi.
  */
 studentApp.run(function($rootScope, $http, $location, $window, authService) {
-    var currentUser = JSON.parse($window.sessionStorage.getItem('currentUser'));
-    console.log(currentUser);
+    // var currentUser = JSON.parse($window.sessionStorage.getItem('currentUser'));
+    function getCurrentUser() {
+        return JSON.parse($window.sessionStorage.getItem('currentUser'));
+    }
+    var currentUser = getCurrentUser();
     // keep user logged in after page refresh
     if (currentUser) {
-        console.log(currentUser.token);
         $http.defaults.headers.common.Authorization = 'Bearer ' + currentUser.token;
     }
     // redirect to login page if not logged in and trying to access a restricted page
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
+        console.log(getCurrentUser());
         var publicPages = ['/', '/login'];
         var restrictedPage = publicPages.indexOf($location.path()) === -1;
-        if (restrictedPage && !currentUser) {
+        if (restrictedPage && !getCurrentUser()) {
             $location.path('/login');
         }
     });
