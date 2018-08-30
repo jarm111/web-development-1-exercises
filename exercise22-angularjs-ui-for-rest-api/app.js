@@ -34,7 +34,7 @@ studentApp.run(function($rootScope, $http, $location, $window, authService) {
         $http.defaults.headers.common['x-access-token'] = currentUser.token;
     }
     // redirect to login page if not logged in and trying to access a restricted page
-    $rootScope.$on('$locationChangeStart', function (event, next, current) {
+    $rootScope.$on('$locationChangeStart', function () {
         console.log(authService.getCurrentUser());
         var publicPages = ['/', '/login'];
         var restrictedPage = publicPages.indexOf($location.path()) === -1;
