@@ -28,21 +28,17 @@ studentApp.config(function($routeProvider) {
  * toimi.
  */
 studentApp.run(function($rootScope, $http, $location, $window, authService) {
-    // var currentUser = JSON.parse($window.sessionStorage.getItem('currentUser'));
-    function getCurrentUser() {
-        return JSON.parse($window.sessionStorage.getItem('currentUser'));
-    }
-    var currentUser = getCurrentUser();
+    var currentUser = authService.getCurrentUser();
     // keep user logged in after page refresh
     if (currentUser) {
         $http.defaults.headers.common.Authorization = 'Bearer ' + currentUser.token;
     }
     // redirect to login page if not logged in and trying to access a restricted page
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
-        console.log(getCurrentUser());
+        console.log(authService.getCurrentUser());
         var publicPages = ['/', '/login'];
         var restrictedPage = publicPages.indexOf($location.path()) === -1;
-        if (restrictedPage && !getCurrentUser()) {
+        if (restrictedPage && !authService.getCurrentUser()) {
             $location.path('/login');
         }
     });
@@ -89,6 +85,10 @@ studentApp.factory('authService', function($http, $window) {
             // remove user from session storage and clear http auth header
             sessionStorage.removeItem('currentUser');
             $http.defaults.headers.common.Authorization = '';    
+        },
+
+        getCurrentUser: function() {
+            return JSON.parse($window.sessionStorage.getItem('currentUser'));
         }
     };
 });
@@ -172,11 +172,13 @@ studentApp.controller('showController', ['$scope', 'dataService', function($scop
 studentApp.controller('loginController', ['$scope', 'authService', function($scope, authService) {
     $scope.loginData = {};
     $scope.loginData.message = '';
+    $scope.isUserLoggedIn = authService.getCurrentUser() !== null;
 
     $scope.login = function() {
         authService.login($scope.loginData.email, $scope.loginData.password, function(result) {
             if (result === 200) {
                 $scope.loginData.message = 'Login successful!';
+                $scope.isUserLoggedIn = true;
             } else if (result === 404) {
                 $scope.loginData.message = 'User with provided email not found!';
             } else if (result === 401) {
@@ -187,6 +189,12 @@ studentApp.controller('loginController', ['$scope', 'authService', function($sco
                 $scope.loginData.message = 'Unknown error: ' + result;
             }
         });
+    };
+
+    $scope.logout = function() {
+        authService.logout();
+        $scope.loginData.message = 'Logged out user!';
+        $scope.isUserLoggedIn = false;
     };
 }]);
 
