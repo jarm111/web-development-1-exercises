@@ -1,4 +1,3 @@
-x-access-token: {{token}}
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNTM1MzUyNzkzLCJleHAiOjE1MzUzNTMzOTN9.8Yrh8d6YXnFc_IShHkRaf25_h6v0kHdi3RwT9giMbwE
 
 ### Add new user
