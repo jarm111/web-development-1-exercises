@@ -31,7 +31,7 @@ studentApp.run(function($rootScope, $http, $location, $window, authService) {
     var currentUser = authService.getCurrentUser();
     // keep user logged in after page refresh
     if (currentUser) {
-        $http.defaults.headers.common.Authorization = 'Bearer ' + currentUser.token;
+        $http.defaults.headers.common['x-access-token'] = currentUser.token;
     }
     // redirect to login page if not logged in and trying to access a restricted page
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
@@ -69,7 +69,7 @@ studentApp.factory('authService', function($http, $window) {
                     // store username and token in session storage to keep user logged as long as browser tab is open
                     $window.sessionStorage.setItem('currentUser', JSON.stringify({email: email, token: token}));
                     // add jwt token to auth header for all requests made by the $http service
-                    $http.defaults.headers.common.Authorization = 'Bearer ' + token;
+                    $http.defaults.headers.common['x-access-token'] = token;
 
                     // execute callback with true to indicate successful login
                     callback(response.status);
@@ -84,7 +84,7 @@ studentApp.factory('authService', function($http, $window) {
         logout: function() {
             // remove user from session storage and clear http auth header
             sessionStorage.removeItem('currentUser');
-            $http.defaults.headers.common.Authorization = '';    
+            $http.defaults.headers.common['x-access-token'] = '';    
         },
 
         getCurrentUser: function() {
